@@ -13,6 +13,8 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GlavniProzor extends JFrame {
 
@@ -42,6 +44,7 @@ public class GlavniProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public GlavniProzor() {
+		setResizable(false);
 		setTitle("Kviz");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 459, 346);
@@ -72,6 +75,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnPitanjaLicitacija() {
 		if (btnPitanjaLicitacija == null) {
 			btnPitanjaLicitacija = new JButton("Pitanja - licitacija");
+			btnPitanjaLicitacija.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.pokreniProzorLicitacije();
+				}
+			});
 			btnPitanjaLicitacija.setBounds(121, 161, 230, 23);
 		}
 		return btnPitanjaLicitacija;
