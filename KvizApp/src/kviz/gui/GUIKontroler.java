@@ -12,6 +12,7 @@ public class GUIKontroler {
 	private static GlavniProzor glavniProzor;
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
+	private static DopunskaProzor dopunskaProzor;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
