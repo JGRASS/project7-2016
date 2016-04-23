@@ -51,3 +51,39 @@ Koji od ovih algoritama ima najbolju efikasnost?
 Bubble Sort&Sink Sort&Insertion Sort&Quick Sort
 
 Quick Sort
+
+Koja od ovih tehnologija ne spada u 'front end'?
+
+PHP&HTML&CSS&Javascript
+
+PHP
+
+Koja od sledecih kolor modela se koristi pri stampanju u boji?
+
+RGB&GYM&USF&CMYK
+
+CMYK
+
+Tvorac programskog jezika C je:
+
+Dennis Ritchie&Tim Cook&Satya Nadella&Sundar Pichai
+
+Dennis Ritchie
+
+Koji od ovih programskih jezika se najvise koristi u Data Miningu?
+
+Python&Pascal&Ruby&R
+
+R
+
+Izbacite uljeza:
+
+INSERT&UPDATE&CASCADE&DELETE
+
+CASCADE
+
+Koji od ovih jezika nije objekto-orijentisan?
+
+C&C++&C#&S
+
+C

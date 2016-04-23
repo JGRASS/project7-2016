@@ -62,6 +62,7 @@ public class GUIKontroler {
 			//JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla pitalice.txt", "Greska", JOptionPane.WARNING_MESSAGE);
 		}
 		resetujPitanja();
+		
 	}
 	public static void resetujPitanja(){
 		

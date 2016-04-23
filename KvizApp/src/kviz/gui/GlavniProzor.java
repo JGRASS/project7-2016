@@ -64,6 +64,7 @@ public class GlavniProzor extends JFrame {
 			btnPitanjaSaPonudjenim.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					GUIKontroler.pokreniProzorZaokruzivanje();
+					
 				}
 			});
 			btnPitanjaSaPonudjenim.setBounds(127, 86, 224, 23);

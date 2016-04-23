@@ -24,6 +24,7 @@ public class ZaokruzivanjeLogika {
 			
 		}
 		in.close();
+		
 	}
 	
 	public String[] vratiPitanjaIOdgovore(int brPitanja){

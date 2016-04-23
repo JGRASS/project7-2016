@@ -81,7 +81,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnA = new JButton("A");
 			btnA.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(brojac<9){
+					if(brojac<15){
 					if(jtaA.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
 						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
@@ -122,7 +122,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnB = new JButton("B");
 			btnB.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(brojac<9){
+					if(brojac<15){
 					if(jtaB.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
 						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
@@ -155,7 +155,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnC = new JButton("C");
 			btnC.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(brojac<9){
+					if(brojac<15){
 					if(jtaC.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
 						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
@@ -187,7 +187,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnD = new JButton("D");
 			btnD.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(brojac<9){
+					if(brojac<15){
 					if(jtaD.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
 						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
