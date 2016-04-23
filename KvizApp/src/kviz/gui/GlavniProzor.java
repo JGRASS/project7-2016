@@ -67,7 +67,7 @@ public class GlavniProzor extends JFrame {
 					
 				}
 			});
-			btnPitanjaSaPonudjenim.setBounds(127, 86, 224, 23);
+			btnPitanjaSaPonudjenim.setBounds(121, 86, 230, 23);
 		}
 		return btnPitanjaSaPonudjenim;
 	}
@@ -79,7 +79,7 @@ public class GlavniProzor extends JFrame {
 					GUIKontroler.pokreniProzorDopunska();
 				}
 			});
-			btnPitanjaNaDopunu.setBounds(127, 123, 224, 23);
+			btnPitanjaNaDopunu.setBounds(121, 123, 230, 23);
 		}
 		return btnPitanjaNaDopunu;
 	}
