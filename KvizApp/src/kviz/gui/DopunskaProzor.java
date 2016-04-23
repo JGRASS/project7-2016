@@ -52,9 +52,8 @@ public class DopunskaProzor extends JFrame {
 	 */
 	public DopunskaProzor() {
 		setTitle("Kviz pitalice na dopunu");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 487, 349);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,14 +70,14 @@ public class DopunskaProzor extends JFrame {
 		if (lblPitanje == null) {
 			lblPitanje = new JLabel("Pitanje");
 			lblPitanje.setHorizontalAlignment(SwingConstants.CENTER);
-			lblPitanje.setBounds(24, 29, 394, 66);
+			lblPitanje.setBounds(10, 29, 451, 66);
 		}
 		return lblPitanje;
 	}
 	private JTextField getTxtOdgovor() {
 		if (txtOdgovor == null) {
 			txtOdgovor = new JTextField();
-			txtOdgovor.setBounds(180, 138, 153, 20);
+			txtOdgovor.setBounds(217, 138, 153, 20);
 			txtOdgovor.setColumns(10);
 		}
 		return txtOdgovor;
@@ -86,14 +85,14 @@ public class DopunskaProzor extends JFrame {
 	private JLabel getLblOdgovor() {
 		if (lblOdgovor == null) {
 			lblOdgovor = new JLabel("Odgovor:");
-			lblOdgovor.setBounds(85, 141, 55, 14);
+			lblOdgovor.setBounds(110, 141, 55, 14);
 		}
 		return lblOdgovor;
 	}
 	private JLabel getLblSkor() {
 		if (lblSkor == null) {
 			lblSkor = new JLabel("SKOR");
-			lblSkor.setBounds(119, 231, 46, 14);
+			lblSkor.setBounds(131, 231, 46, 14);
 		}
 		return lblSkor;
 	}
@@ -102,7 +101,7 @@ public class DopunskaProzor extends JFrame {
 			txtSkor = new JTextField();
 			txtSkor.setText("0");
 			txtSkor.setEditable(false);
-			txtSkor.setBounds(180, 228, 25, 20);
+			txtSkor.setBounds(217, 228, 25, 20);
 			txtSkor.setColumns(10);
 		}
 		return txtSkor;
@@ -130,14 +129,14 @@ public class DopunskaProzor extends JFrame {
 					getTxtOdgovor().setText("");
 				}
 			});
-			btnOk.setBounds(177, 180, 89, 23);
+			btnOk.setBounds(217, 180, 89, 23);
 		}
 		return btnOk;
 	}
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
-			menuBar.setBounds(0, 0, 444, 21);
+			menuBar.setBounds(0, 0, 471, 21);
 			menuBar.add(getMnHelp());
 		}
 		return menuBar;

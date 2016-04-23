@@ -94,7 +94,8 @@ public class GUIKontroler {
 	}
 	public static void postaviPitanje(int skor) {
 		if(skor>=15){
-			JOptionPane.showMessageDialog(null, "Pobedili ste! Nova igra?", "Cestitamo!", JOptionPane.YES_NO_OPTION);
+			JOptionPane.showMessageDialog(null, "Pobedili ste!", "Cestitamo!", JOptionPane.YES_NO_OPTION);
+			zatvoriProzorDopunska();
 		}
 		pitanjeOdgovor = dopunskaLogika.pitanjeNivo(skor);
 		dopunskaProzor.getLblPitanje().setText(pitanjeOdgovor[0]);

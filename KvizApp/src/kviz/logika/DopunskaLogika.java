@@ -66,7 +66,7 @@ public class DopunskaLogika {
 	}
 
 	public String[] pitanjeNivo(int skor) {
-		if(skor<=5){
+		if(skor<5){
 			int a;
 			while(true){
 				a = (int)(Math.random() * laksa.size());
@@ -79,7 +79,7 @@ public class DopunskaLogika {
 			laksa.remove(a);
 			return new String[]{pitanje, odgovor};
 		}else{
-			if(skor<=10){
+			if(skor<10){
 				int a;
 				while(true){
 					a = (int)(Math.random() * srednja.size());
