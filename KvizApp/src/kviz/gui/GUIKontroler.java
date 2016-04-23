@@ -7,22 +7,50 @@ import javax.swing.JOptionPane;
 import kviz.logika.DopunskaLogika;
 import kviz.logika.LicitacijaLogika;
 import kviz.logika.ZaokruzivanjeLogika;
-
+/**
+ * Klasa koja predstavlja vezu izmedju logike i izgleda aplikacije
+ * @author Marko, Sava, Andrija
+ * @version 1.0
+ */
 public class GUIKontroler {
-
+	/**
+	 * Glavni prozor prikazan na pocetku igre
+	 */
 	private static GlavniProzor glavniProzor;
-
+	
+	/**
+	 * Prozor kviza pitalice na zaokruzivanje
+	 */
 	private static PitanjaNaZaokruzivanje zaokruzivanjeProzor;
+	/**
+	 * Logika kviza pitalice na zaokruzivanje
+	 */
 	private static ZaokruzivanjeLogika zaokruzivanjeLogika;
+	/**
+	 * Redni broj postavljenog pitanja
+	 */
 	private static int redniBrPitanja = 0;
+	/**
+	 * Niz stringova postavljenog pitanja i ponudjenih odgovora
+	 */
 	private static String[] pitanjaIOdg;
 
 	
 	private static LicitacijeProzor licitacijeProzor;
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
+	
+	/**
+	 * Prozor kviza pitalice na dopunu
+	 */
 	private static DopunskaProzor dopunskaProzor;
+	/**
+	 * Logika kviza pitalice na dopunu
+	 */
 	private static DopunskaLogika dopunskaLogika;
+	/**
+	 * Niz stringova u koji ce se upisivati trenutno pitanje i odgovor
+	 */
 	private static String[] pitanjeOdgovor;
 	
 	public static void main(String[] args) {
@@ -115,6 +143,9 @@ public class GUIKontroler {
 	public static void zatvoriProzor() {
 		licitacijeProzor.dispose();
 	}
+	/**
+	 * Otvara prozor za kviz sa dopunskim pitalicama i zapocinje igru postavljanjem prvog pitanja
+	 */
 	public static void pokreniProzorDopunska() {
 		
 		dopunskaProzor = new DopunskaProzor();
@@ -131,6 +162,10 @@ public class GUIKontroler {
 		postaviPitanje(Integer.parseInt(dopunskaProzor.getTxtSkor().getText()));
 		
 	}
+	/**
+	 * Postavlja pitanje u zavisnosti od trenutnog skora takmicara
+	 * @param skor - Trenutni skor takmicara
+	 */
 	public static void postaviPitanje(int skor) {
 		if(skor>=15){
 			JOptionPane.showMessageDialog(null, "Pobedili ste!", "Cestitamo!", JOptionPane.YES_NO_OPTION);
@@ -140,6 +175,11 @@ public class GUIKontroler {
 		dopunskaProzor.getLblPitanje().setText(pitanjeOdgovor[0]);
 		
 	}
+	/**
+	 * Proverava dat odgovor takmicara
+	 * @param odgovor
+	 * @return true - ako je dat odgovor tacan, false - ako je dat odgovor pogresan
+	 */
 	public static boolean proveriOdgovor(String odgovor) {
 		if(odgovor.equals(pitanjeOdgovor[1])){
 			return true;
@@ -147,6 +187,9 @@ public class GUIKontroler {
 			return false;
 		}
 	}
+	/**
+	 * Zatvara ceo prozor kviza pitalice na dopunu
+	 */
 	public static void zatvoriProzorDopunska() {
 		dopunskaProzor.dispose();
 	}
