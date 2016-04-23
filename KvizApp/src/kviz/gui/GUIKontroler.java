@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JOptionPane;
 
+import kviz.logika.DopunskaLogika;
 import kviz.logika.LicitacijaLogika;
 
 public class GUIKontroler {
@@ -13,6 +14,8 @@ public class GUIKontroler {
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
 	private static DopunskaProzor dopunskaProzor;
+	private static DopunskaLogika dopunskaLogika;
+	private static String[] pitanjeOdgovor;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -21,6 +24,8 @@ public class GUIKontroler {
 					glavniProzor = new GlavniProzor();
 					glavniProzor.setVisible(true);
 					licitacijeLogika = new LicitacijaLogika();
+					dopunskaLogika = new DopunskaLogika();
+					dopunskaProzor = new DopunskaProzor();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,6 +75,40 @@ public class GUIKontroler {
 	}
 	public static void zatvoriProzor() {
 		licitacijeProzor.dispose();
+	}
+	public static void pokreniProzorDopunska() {
+		
+		dopunskaProzor = new DopunskaProzor();
+		dopunskaProzor.setVisible(true);
+		dopunskaProzor.setLocationRelativeTo(null);
+		
+		try {
+			dopunskaLogika.ucitajPitanja();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja pitanja", "Greska", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			dopunskaProzor.dispose();
+		}
+		postaviPitanje(Integer.parseInt(dopunskaProzor.getTxtSkor().getText()));
+		
+	}
+	public static void postaviPitanje(int skor) {
+		if(skor>=15){
+			JOptionPane.showMessageDialog(null, "Pobedili ste! Nova igra?", "Cestitamo!", JOptionPane.YES_NO_OPTION);
+		}
+		pitanjeOdgovor = dopunskaLogika.pitanjeNivo(skor);
+		dopunskaProzor.getLblPitanje().setText(pitanjeOdgovor[0]);
+		
+	}
+	public static boolean proveriOdgovor(String odgovor) {
+		if(odgovor.equals(pitanjeOdgovor[1])){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public static void zatvoriProzorDopunska() {
+		dopunskaProzor.dispose();
 	}
 
 }

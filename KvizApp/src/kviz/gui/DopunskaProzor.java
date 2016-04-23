@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DopunskaProzor extends JFrame {
 
@@ -24,18 +27,18 @@ public class DopunskaProzor extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DopunskaProzor frame = new DopunskaProzor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					DopunskaProzor frame = new DopunskaProzor();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -55,7 +58,7 @@ public class DopunskaProzor extends JFrame {
 		contentPane.add(getTxtSkor());
 		contentPane.add(getBtnOk());
 	}
-	private JLabel getLblPitanje() {
+	public JLabel getLblPitanje() {
 		if (lblPitanje == null) {
 			lblPitanje = new JLabel("Pitanje");
 			lblPitanje.setHorizontalAlignment(SwingConstants.CENTER);
@@ -85,9 +88,10 @@ public class DopunskaProzor extends JFrame {
 		}
 		return lblSkor;
 	}
-	private JTextField getTxtSkor() {
+	public JTextField getTxtSkor() {
 		if (txtSkor == null) {
 			txtSkor = new JTextField();
+			txtSkor.setText("0");
 			txtSkor.setEditable(false);
 			txtSkor.setBounds(180, 228, 25, 20);
 			txtSkor.setColumns(10);
@@ -97,6 +101,25 @@ public class DopunskaProzor extends JFrame {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
+			btnOk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					boolean kraj = false;
+					boolean provera = GUIKontroler.proveriOdgovor(getTxtOdgovor().getText().toUpperCase());
+					if(provera){
+						int skor = Integer.parseInt(getTxtSkor().getText());
+						skor = skor+1;
+						String s = "" + skor;
+						getTxtSkor().setText(s);
+					}else{
+						JOptionPane.showMessageDialog(null, "Vas skor je: " + getTxtSkor().getText(), "Kraj igre", JOptionPane.INFORMATION_MESSAGE);
+						kraj = true;
+						GUIKontroler.zatvoriProzorDopunska();
+					}
+					if(!kraj){
+						GUIKontroler.postaviPitanje(Integer.parseInt(getTxtSkor().getText()));
+					}
+				}
+			});
 			btnOk.setBounds(177, 180, 89, 23);
 		}
 		return btnOk;

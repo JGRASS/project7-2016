@@ -68,6 +68,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnPitanjaNaDopunu() {
 		if (btnPitanjaNaDopunu == null) {
 			btnPitanjaNaDopunu = new JButton("Pitanja na dopunu");
+			btnPitanjaNaDopunu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.pokreniProzorDopunska();
+				}
+			});
 			btnPitanjaNaDopunu.setBounds(127, 123, 224, 23);
 		}
 		return btnPitanjaNaDopunu;
