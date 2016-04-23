@@ -12,14 +12,12 @@ public class GUIKontroler {
 
 	private static GlavniProzor glavniProzor;
 
-	//Svrletovi atributi
 	private static PitanjaNaZaokruzivanje zaokruzivanjeProzor;
 	private static ZaokruzivanjeLogika zaokruzivanjeLogika;
 	private static int redniBrPitanja = 0;
 	private static String[] pitanjaIOdg;
 
 	
-	//Maretovi atributi
 	private static LicitacijeProzor licitacijeProzor;
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
