@@ -18,7 +18,7 @@ public class DopunskaLogika {
 	
 	public void ucitajPitanja() throws Exception{
 		
-		BufferedReader in = new BufferedReader(new FileReader("fajlovi/	dopunska.txt"));
+		BufferedReader in = new BufferedReader(new FileReader("fajlovi/dopunska.txt"));
 		
 		boolean kraj = false;
 
