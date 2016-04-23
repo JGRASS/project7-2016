@@ -1,0 +1,53 @@
+Koju strukturu predstavlja STACK?
+
+FCFS&LIFO&FIFO&LILO
+
+LIFO
+
+Koja je velicina adrese IPv6?
+
+64 bita&128 bita&32 bita&6 bita 
+
+128 bita
+
+Sta je Windows Azure?
+
+Search Engine&Cloud Computing platforma&Novi OS&Java biblioteka
+
+Cloud Computing platforma
+
+IP 127.0.0.1 je adresa cega?
+
+Vaseg Racunara&Google&Facebook&Github
+
+Vaseg Racunara
+
+Sta predstavlja .jar?
+
+Javascript Arhiva&Javino razvojno okruzenje&Tegla&Java arhiva
+
+Java arhiva
+
+Preko kojeg od navedenih browsera se pretrazuje 'Deep Web'?
+
+Opera&Safari&Edge&Tor
+
+Tor
+
+Za povezivanje sa bazom podataka preko jave, najcesce se koristi:
+
+BCC&JDBC&BDCIJ&JBSS
+
+JDBC
+
+Oznaka '*' u C-u predstavlja:
+
+Adresu&Pokazivac&Vrednost&Trodimenzionalna Matrica
+
+Pokazivac
+
+Koji od ovih algoritama ima najbolju efikasnost?
+
+Bubble Sort&Sink Sort&Insertion Sort&Quick Sort
+
+Quick Sort

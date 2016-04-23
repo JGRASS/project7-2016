@@ -21,7 +21,7 @@ public class LicitacijaLogika {
 	
 	public void ucitajFajl() throws Exception {
 		
-			FileReader f = new FileReader("licitacije.txt");
+			FileReader f = new FileReader("fajlovi/licitacije.txt");
 			BufferedReader in = new BufferedReader(f);
 			
 			boolean kraj = false;
