@@ -13,6 +13,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class DopunskaProzor extends JFrame {
 
@@ -23,6 +26,10 @@ public class DopunskaProzor extends JFrame {
 	private JLabel lblSkor;
 	private JTextField txtSkor;
 	private JButton btnOk;
+	private JMenuBar menuBar;
+	private JMenu mnHelp;
+	private JMenuItem mntmAbout;
+	private JMenuItem mntmPravilaIgre;
 
 	/**
 	 * Launch the application.
@@ -44,6 +51,7 @@ public class DopunskaProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public DopunskaProzor() {
+		setTitle("Kviz pitalice na dopunu");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -57,6 +65,7 @@ public class DopunskaProzor extends JFrame {
 		contentPane.add(getLblSkor());
 		contentPane.add(getTxtSkor());
 		contentPane.add(getBtnOk());
+		contentPane.add(getMenuBar_1());
 	}
 	public JLabel getLblPitanje() {
 		if (lblPitanje == null) {
@@ -118,10 +127,52 @@ public class DopunskaProzor extends JFrame {
 					if(!kraj){
 						GUIKontroler.postaviPitanje(Integer.parseInt(getTxtSkor().getText()));
 					}
+					getTxtOdgovor().setText("");
 				}
 			});
 			btnOk.setBounds(177, 180, 89, 23);
 		}
 		return btnOk;
+	}
+	private JMenuBar getMenuBar_1() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+			menuBar.setBounds(0, 0, 444, 21);
+			menuBar.add(getMnHelp());
+		}
+		return menuBar;
+	}
+	private JMenu getMnHelp() {
+		if (mnHelp == null) {
+			mnHelp = new JMenu("Help");
+			mnHelp.add(getMntmPravilaIgre());
+			mnHelp.add(getMntmAbout());
+		}
+		return mnHelp;
+	}
+	private JMenuItem getMntmAbout() {
+		if (mntmAbout == null) {
+			mntmAbout = new JMenuItem("About");
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(null, "Pitalice kreirao Sava Pejovic", "O autoru", JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+		}
+		return mntmAbout;
+	}
+	private JMenuItem getMntmPravilaIgre() {
+		if (mntmPravilaIgre == null) {
+			mntmPravilaIgre = new JMenuItem("Pravila igre");
+			mntmPravilaIgre.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JOptionPane.showMessageDialog(null, "Na postavljeno pitanje unosi se odgovor u odgovarajuce polje. " + 
+				" Nisu bitna velika i mala slova. " + "\n" + 
+				"Pitanja su razlicite tezine. Prvih pet pitanja su laksa, zatim srednje tezine i na kraju najteza. "+"\n"+
+				"Ako tacno odgovorite na 15 postavljenih pitanja, pobedili ste! Srecno!", "Pravila igre", JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+		}
+		return mntmPravilaIgre;
 	}
 }
