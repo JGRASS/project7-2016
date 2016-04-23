@@ -6,11 +6,21 @@ import javax.swing.JOptionPane;
 
 import kviz.logika.DopunskaLogika;
 import kviz.logika.LicitacijaLogika;
+import kviz.logika.ZaokruzivanjeLogika;
 
 public class GUIKontroler {
 
-	private static LicitacijeProzor licitacijeProzor;
 	private static GlavniProzor glavniProzor;
+
+	//Svrletovi atributi
+	private static PitanjaNaZaokruzivanje zaokruzivanjeProzor;
+	private static ZaokruzivanjeLogika zaokruzivanjeLogika;
+	private static int redniBrPitanja = 0;
+	private static String[] pitanjaIOdg;
+
+	
+	//Maretovi atributi
+	private static LicitacijeProzor licitacijeProzor;
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
 	private static DopunskaProzor dopunskaProzor;
@@ -26,6 +36,7 @@ public class GUIKontroler {
 					licitacijeLogika = new LicitacijaLogika();
 					dopunskaLogika = new DopunskaLogika();
 					dopunskaProzor = new DopunskaProzor();
+					zaokruzivanjeLogika = new ZaokruzivanjeLogika();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,7 +56,37 @@ public class GUIKontroler {
 		}
 		pronadjiOdgovorLicitacije();
 	}
-	
+	public static void pokreniProzorZaokruzivanje(){
+		zaokruzivanjeProzor = new PitanjaNaZaokruzivanje();
+		zaokruzivanjeProzor.setVisible(true);
+		zaokruzivanjeProzor.setLocationRelativeTo(null);
+		try{
+			zaokruzivanjeLogika.ucitajZaokruzivanjeFajl();
+//			zaokruzivanjeLogika.pitanja;
+		}catch(Exception e){
+			e.printStackTrace();
+			//JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla pitalice.txt", "Greska", JOptionPane.WARNING_MESSAGE);
+		}
+		resetujPitanja();
+		
+	}
+	public static void resetujPitanja(){
+		
+		pitanjaIOdg = zaokruzivanjeLogika.vratiPitanjaIOdgovore(redniBrPitanja);
+		String[] odgovori = pitanjaIOdg[1].split("&");
+		zaokruzivanjeProzor.getJtaPitanje().setText(pitanjaIOdg[0]);
+		zaokruzivanjeProzor.getJtaA().setText(odgovori[0]);
+		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
+		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
+		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+		zaokruzivanjeProzor.getLblBrPitanja().setText("Pitanje broj:" +(redniBrPitanja+1));
+		redniBrPitanja++;
+		
+
+	}
+	public static String vratiTacan(){
+		return pitanjaIOdg[2];
+	}
 	public static void pronadjiOdgovorLicitacije(){
 		nizSaOdgovorom = licitacijeLogika.izaberiPitanje(licitacijeProzor.vratiSelektovaniIndeks());
 		licitacijeProzor.getLblPitanje().setText(nizSaOdgovorom[0]);
@@ -111,5 +152,10 @@ public class GUIKontroler {
 	public static void zatvoriProzorDopunska() {
 		dopunskaProzor.dispose();
 	}
+	public static void zatvoriZaokruzivanjeProzor(){
+		zaokruzivanjeProzor.dispose(); 
+		
+	}
+	
 
 }
