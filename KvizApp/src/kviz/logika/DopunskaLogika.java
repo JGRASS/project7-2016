@@ -73,6 +73,9 @@ public class DopunskaLogika {
 	}
 
 	public void setLaksa(LinkedList<String> laksa) {
+		if(laksa == null){
+			throw new RuntimeException("Greska! Lista nije dobro prosledjena");
+		}
 		this.laksa = laksa;
 	}
 	/**
@@ -84,6 +87,9 @@ public class DopunskaLogika {
 	}
 
 	public void setSrednja(LinkedList<String> srednja) {
+		if(srednja == null){
+			throw new RuntimeException("Greska! Lista nije dobro prosledjena");
+		}
 		this.srednja = srednja;
 	}
 	/**
@@ -95,6 +101,9 @@ public class DopunskaLogika {
 	}
 
 	public void setTeza(LinkedList<String> teza) {
+		if(teza == null){
+			throw new RuntimeException("Greska! Lista nije dobro prosledjena");
+		}
 		this.teza = teza;
 	}
 	/**
