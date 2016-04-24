@@ -1,8 +1,11 @@
 package kviz.logika;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -12,18 +15,28 @@ public class LicitacijaLogika {
 	private LinkedList<String> prviNivo;
 	private LinkedList<String> drugiNivo;
 	private LinkedList<String> treciNivo;
+	private LinkedList<Integer> highScore;
+	private LinkedList<String> highScoreImena;
+	private boolean vecUcitano = false;
 	
 	public LicitacijaLogika(){
 		prviNivo = new LinkedList<String>();
 		drugiNivo = new LinkedList<String>();
 		treciNivo = new LinkedList<String>();
+		highScore = new LinkedList<Integer>();
+		highScoreImena = new LinkedList<String>();
 	}
 	
 	public void ucitajFajl() throws Exception {
-		
+			if(!(prviNivo.isEmpty()))
+				prviNivo.remove();
+			if(!(drugiNivo.isEmpty()))
+				drugiNivo.remove();
+			if(!(treciNivo.isEmpty()))
+				treciNivo.remove();
 			FileReader f = new FileReader("fajlovi/licitacije.txt");
 			BufferedReader in = new BufferedReader(f);
-			
+
 			boolean kraj = false;
 
 			while(in.readLine().equals("1")){
@@ -41,8 +54,41 @@ public class LicitacijaLogika {
 					kraj = true;
 				}
 			}
-			
+
 			in.close();
+		
+
+			FileReader f1 = new FileReader("highscore/licitacijeHighScore.txt");
+			BufferedReader in1 = new BufferedReader(f1);
+			
+			int r = 0;
+			String s;
+			if(!vecUcitano){
+				boolean kraj1 = false;
+				while(!kraj1){
+					Integer i = Integer.valueOf(in1.readLine());
+					highScore.add(i);
+					highScoreImena.add(in1.readLine());
+					r++;
+					if(in1.readLine() == null){
+						kraj1 = true;
+					}
+				}
+				vecUcitano = true;
+			} else{
+				boolean kraj1 = false;
+				while(!kraj1){
+					Integer i = Integer.valueOf(in1.readLine());
+					highScore.set(r, i);
+					highScoreImena.set(r, in1.readLine());
+					r++;
+					if(in1.readLine() == null){
+						kraj1 = true;
+					}
+				}
+			}
+			
+			in1.close();
 	}
 
 	public String[] izaberiPitanje(int brPitanja) {
@@ -104,5 +150,60 @@ public class LicitacijaLogika {
 	}
 	public void setTreciNivo(LinkedList<String> treciNivo) {
 		this.treciNivo = treciNivo;
+	}
+	public LinkedList<Integer> getHighScore() {
+		return highScore;
+	}
+	public void setHighScore(LinkedList<Integer> highScore) {
+		this.highScore = highScore;
+	}
+
+	public LinkedList<String> getHighScoreImena() {
+		return highScoreImena;
+	}
+
+	public void setHighScoreImena(LinkedList<String> highScoreImena) {
+		this.highScoreImena = highScoreImena;
+	}
+
+	public int proveriIUpisiNaRangListu(int poeni) {
+		if(poeni > highScore.get(0)){
+//			highScore.addFirst(poeni);
+//			highScore.removeLast();
+			return 0;
+		}
+		for (int i = 0; i < highScore.size() - 1; i++) {
+			if(highScore.get(i) > poeni && highScore.get(i + 1) < poeni){
+//				highScore.add(i + 1, poeni);
+//				highScore.remove(10);
+				return i + 1;
+			}
+		}
+		return -1;
+	}
+
+	public void upisiImeUListu(String ime, int pozicija,int poeni) {
+		highScoreImena.set(pozicija, ime);
+		highScore.set(pozicija, poeni);
+	}
+
+	public String vratiRangListu() {
+		String s = new String();
+		for (int i = 0; i < highScore.size(); i++) {
+			s += (i+1) +  ". " + highScoreImena.get(i) + "  " + highScore.get(i) + "\n";
+		}
+		return s;
+	}
+
+	public void serijalizuj() throws Exception {
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscore/licitacijeHighScore.txt")));
+		
+		for (int i = 0; i < highScore.size(); i++) {
+			out.println(highScore.get(i));
+			out.println(highScoreImena.get(i));
+			if(i != highScore.size() - 1)
+				out.println();
+		}
+		out.close();		
 	}
 }

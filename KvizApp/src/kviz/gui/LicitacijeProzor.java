@@ -142,8 +142,15 @@ public class LicitacijeProzor extends JFrame {
 						list.setSelectedIndex(list.getSelectedIndex() - 1);
 
 						if(kraj){
-							JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
+							/*JOptionPane.showMessageDialog(null, "Igra je zavrsena. Niste uspeli da se upise na rang listu. Broj poena koje"
 									+ " ste osvojili je: " + lblBrojPoena.getText() , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+									*/
+							int poen = Integer.parseInt(lblBrojPoena.getText());
+							if(!GUIKontroler.daLiUpisatiNaRangListuLicitacija(poen)){
+								GUIKontroler.pokreniLicitacijeScoreDijalog(false, poeni);
+							}else {
+								GUIKontroler.pokreniLicitacijeScoreDijalog(true, poen);
+							}
 							GUIKontroler.zatvoriProzor();
 						}else{
 							GUIKontroler.pronadjiOdgovorLicitacije();

@@ -1,9 +1,15 @@
 package kviz.gui;
 
 import java.awt.EventQueue;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import kviz.gui.dijalog.LicitacijeScoreDijalog;
 import kviz.logika.DopunskaLogika;
 import kviz.logika.LicitacijaLogika;
 import kviz.logika.ZaokruzivanjeLogika;
@@ -39,6 +45,8 @@ public class GUIKontroler {
 	private static LicitacijeProzor licitacijeProzor;
 	private static LicitacijaLogika licitacijeLogika;
 	private static String[] nizSaOdgovorom;
+	private static LicitacijeScoreDijalog licitacijeScoreDijalog;
+	private static int pozicija;
 	
 	/**
 	 * Prozor kviza pitalice na dopunu
@@ -76,7 +84,7 @@ public class GUIKontroler {
 		try {
 			licitacijeLogika.ucitajFajl();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla licitacije.txt", "Greska", 
+			JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla", "Greska", 
 											JOptionPane.ERROR_MESSAGE);	
 			licitacijeProzor.dispose();
 		}
@@ -198,5 +206,28 @@ public class GUIKontroler {
 		
 	}
 	
-
+	public static void pokreniLicitacijeScoreDijalog(boolean button, int poeni) {
+		licitacijeScoreDijalog = new LicitacijeScoreDijalog(button, poeni);
+		licitacijeScoreDijalog.setVisible(true);
+	}
+	
+	public static boolean daLiUpisatiNaRangListuLicitacija(int poeni) {
+		pozicija = licitacijeLogika.proveriIUpisiNaRangListu(poeni);
+		if(pozicija == -1)
+			return false;
+		else
+			return true;
+	}
+	
+	public static void upisiImeNaLicitacije(String ime, int poeni) {
+		licitacijeLogika.upisiImeUListu(ime, pozicija, poeni);
+		
+	}
+	public static String rangListaLicitacije() {
+		return licitacijeLogika.vratiRangListu();
+	}
+	public static void serijalizujLicitacije() throws Exception {
+		licitacijeLogika.serijalizuj();
+	}
+	
 }
