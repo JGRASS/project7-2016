@@ -1,8 +1,12 @@
 package kviz.logika;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 /**
  * Klasa koja upravlja logikom kviza na dopunu
  * @author Sava
@@ -152,6 +156,70 @@ public class DopunskaLogika {
 			}
 		}
 		
+	}
+	public LinkedList<String> ucitajRangListu() throws Exception{
+		LinkedList<String> rank = new LinkedList<>();
+		BufferedReader in = new BufferedReader(new FileReader("fajlovi/rang_dopunska.txt"));
+		while(in.readLine()!=null){
+			rank.add(in.readLine());
+			rank.add(in.readLine());
+		}
+		in.close();
+		return rank;
+	}
+	public void ubaciURangListu(String imeTakmicara, String skor) {
+		LinkedList<String> rank = new LinkedList<>();
+		try {
+			rank = ucitajRangListu();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(rank.isEmpty()){
+			rank.add(skor);
+			rank.add(imeTakmicara);
+			return;
+		}
+		boolean unet = false;
+		for(int i = 1; i < rank.size(); i=i+2){
+			if(Integer.parseInt(rank.get(i)) < Integer.parseInt(skor)){
+				rank.add(i-1, skor);
+				rank.add(i-1, imeTakmicara);
+				JOptionPane.showMessageDialog(null, "Upisani ste u rang listu!", "Cestitamo", JOptionPane.INFORMATION_MESSAGE);
+				unet = true;
+				break;
+			}
+		}
+		while(rank.size()>30){
+			rank.removeLast();
+		}
+		if(unet == false && rank.size() < 30){
+			rank.addLast(imeTakmicara);
+			rank.addLast(skor);
+			JOptionPane.showMessageDialog(null, "Upisani ste u rang listu!", "Cestitamo", JOptionPane.INFORMATION_MESSAGE);
+			osveziRangListu(rank);
+		}
+		osveziRangListu(rank);
+	}
+	private void osveziRangListu(LinkedList<String> rank) {
+		PrintWriter in;
+		try {
+			in = new PrintWriter(new BufferedWriter(new FileWriter("fajlovi/rang_dopunska.txt")));
+			in.println("RANG LISTA");
+			for(int i = 0; i < rank.size(); i=i+2){
+				if(i+2 != rank.size()){
+					in.println(rank.get(i));
+					in.println(rank.get(i+1));
+					in.println("");
+				}else{
+					in.println(rank.get(i));
+					in.print(rank.get(i+1));
+				}
+			}
+			
+			in.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 

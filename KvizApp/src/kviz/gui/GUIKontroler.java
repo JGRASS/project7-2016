@@ -1,6 +1,7 @@
 package kviz.gui;
 
 import java.awt.EventQueue;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
@@ -48,6 +49,7 @@ public class GUIKontroler {
 	 * Logika kviza pitalice na dopunu
 	 */
 	private static DopunskaLogika dopunskaLogika;
+	private static DopunskaHighscore dopunskaProzorRang;
 	/**
 	 * Niz stringova u koji ce se upisivati trenutno pitanje i odgovor
 	 */
@@ -62,6 +64,7 @@ public class GUIKontroler {
 					licitacijeLogika = new LicitacijaLogika();
 					dopunskaLogika = new DopunskaLogika();
 					dopunskaProzor = new DopunskaProzor();
+					dopunskaProzorRang = new DopunskaHighscore();
 					zaokruzivanjeLogika = new ZaokruzivanjeLogika();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -169,7 +172,8 @@ public class GUIKontroler {
 	public static void postaviPitanje(int skor) {
 		if(skor>=15){
 			JOptionPane.showMessageDialog(null, "Pobedili ste!", "Cestitamo!", JOptionPane.YES_NO_OPTION);
-			zatvoriProzorDopunska();
+			rangLista();
+			dopunskaProzor.dispose();
 		}
 		pitanjeOdgovor = dopunskaLogika.pitanjeNivo(skor);
 		dopunskaProzor.getLblPitanje().setText(pitanjeOdgovor[0]);
@@ -197,6 +201,21 @@ public class GUIKontroler {
 		zaokruzivanjeProzor.dispose(); 
 		
 	}
-	
-
+	public static void rangLista() {
+		dopunskaLogika.ubaciURangListu(dopunskaProzor.getTxtImeTakmicara().getText(),dopunskaProzor.getTxtSkor().getText());
+	}
+	public static void pokreniProzorDopunskaHighscore() {
+		dopunskaProzorRang = new DopunskaHighscore();
+		dopunskaProzorRang.setVisible(true);
+		dopunskaProzorRang.enable();
+		dopunskaProzorRang.setLocationRelativeTo(null);
+	}
+	public static LinkedList<String> vratiRangListu(){
+		try {
+			return dopunskaLogika.ucitajRangListu();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

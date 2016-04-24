@@ -30,6 +30,10 @@ public class DopunskaProzor extends JFrame {
 	private JMenu mnHelp;
 	private JMenuItem mntmAbout;
 	private JMenuItem mntmPravilaIgre;
+	private JLabel lblImeTakmicara;
+	private JTextField txtImeTakmicara;
+	private JButton btnPotvrdi;
+	private JMenuItem mntmRangLista;
 
 	/**
 	 * Launch the application.
@@ -65,10 +69,14 @@ public class DopunskaProzor extends JFrame {
 		contentPane.add(getTxtSkor());
 		contentPane.add(getBtnOk());
 		contentPane.add(getMenuBar_1());
+		contentPane.add(getLblImeTakmicara());
+		contentPane.add(getTxtImeTakmicara());
+		contentPane.add(getBtnPotvrdi());
 	}
 	public JLabel getLblPitanje() {
 		if (lblPitanje == null) {
 			lblPitanje = new JLabel("Pitanje");
+			lblPitanje.setVisible(false);
 			lblPitanje.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPitanje.setBounds(10, 29, 451, 66);
 		}
@@ -77,6 +85,7 @@ public class DopunskaProzor extends JFrame {
 	private JTextField getTxtOdgovor() {
 		if (txtOdgovor == null) {
 			txtOdgovor = new JTextField();
+			txtOdgovor.setVisible(false);
 			txtOdgovor.setBounds(217, 138, 153, 20);
 			txtOdgovor.setColumns(10);
 		}
@@ -85,6 +94,7 @@ public class DopunskaProzor extends JFrame {
 	private JLabel getLblOdgovor() {
 		if (lblOdgovor == null) {
 			lblOdgovor = new JLabel("Odgovor:");
+			lblOdgovor.setVisible(false);
 			lblOdgovor.setBounds(110, 141, 55, 14);
 		}
 		return lblOdgovor;
@@ -92,6 +102,7 @@ public class DopunskaProzor extends JFrame {
 	private JLabel getLblSkor() {
 		if (lblSkor == null) {
 			lblSkor = new JLabel("SKOR");
+			lblSkor.setVisible(false);
 			lblSkor.setBounds(131, 231, 46, 14);
 		}
 		return lblSkor;
@@ -99,6 +110,7 @@ public class DopunskaProzor extends JFrame {
 	public JTextField getTxtSkor() {
 		if (txtSkor == null) {
 			txtSkor = new JTextField();
+			txtSkor.setVisible(false);
 			txtSkor.setText("0");
 			txtSkor.setEditable(false);
 			txtSkor.setBounds(217, 228, 25, 20);
@@ -109,6 +121,7 @@ public class DopunskaProzor extends JFrame {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
+			btnOk.setVisible(false);
 			btnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					boolean kraj = false;
@@ -121,6 +134,7 @@ public class DopunskaProzor extends JFrame {
 					}else{
 						JOptionPane.showMessageDialog(null, "Vas skor je: " + getTxtSkor().getText(), "Kraj igre", JOptionPane.INFORMATION_MESSAGE);
 						kraj = true;
+						GUIKontroler.rangLista();
 						GUIKontroler.zatvoriProzorDopunska();
 					}
 					if(!kraj){
@@ -145,6 +159,7 @@ public class DopunskaProzor extends JFrame {
 		if (mnHelp == null) {
 			mnHelp = new JMenu("Help");
 			mnHelp.add(getMntmPravilaIgre());
+			mnHelp.add(getMntmRangLista());
 			mnHelp.add(getMntmAbout());
 		}
 		return mnHelp;
@@ -173,5 +188,52 @@ public class DopunskaProzor extends JFrame {
 			});
 		}
 		return mntmPravilaIgre;
+	}
+	private JLabel getLblImeTakmicara() {
+		if (lblImeTakmicara == null) {
+			lblImeTakmicara = new JLabel("Ime takmicara?");
+			lblImeTakmicara.setBounds(156, 81, 98, 14);
+		}
+		return lblImeTakmicara;
+	}
+	public JTextField getTxtImeTakmicara() {
+		if (txtImeTakmicara == null) {
+			txtImeTakmicara = new JTextField();
+			txtImeTakmicara.setBounds(131, 107, 123, 20);
+			txtImeTakmicara.setColumns(10);
+		}
+		return txtImeTakmicara;
+	}
+	private JButton getBtnPotvrdi() {
+		if (btnPotvrdi == null) {
+			btnPotvrdi = new JButton("Potvrdi");
+			btnPotvrdi.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					btnPotvrdi.setVisible(false);
+					lblImeTakmicara.setVisible(false);
+					txtImeTakmicara.setVisible(false);
+					lblOdgovor.setVisible(true);
+					lblPitanje.setVisible(true);
+					lblSkor.setVisible(true);
+					txtOdgovor.setVisible(true);
+					txtSkor.setVisible(true);
+					btnOk.setVisible(true);
+				}
+			});
+			btnPotvrdi.setBounds(299, 90, 89, 23);
+		}
+		return btnPotvrdi;
+	}
+	private JMenuItem getMntmRangLista() {
+		if (mntmRangLista == null) {
+			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.pokreniProzorDopunskaHighscore();
+					
+				}
+			});
+		}
+		return mntmRangLista;
 	}
 }
