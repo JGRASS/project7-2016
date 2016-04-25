@@ -10,15 +10,40 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-
+/**
+ * Klasa koja predstavlja logiku kviza licitacije.
+ * @author Marko
+ *
+ */
 public class LicitacijaLogika {
+	/**
+	 * Lista pitanja prvog nivoa.
+	 */
 	private LinkedList<String> prviNivo;
+	/**
+	 * Lista pitanja drugog nivoa.
+	 */
 	private LinkedList<String> drugiNivo;
+	/**
+	 * Lista pitanja treceg nivoa.
+	 */
 	private LinkedList<String> treciNivo;
+	/**
+	 * Lista sa poenima na rang listi kviza.
+	 */
 	private LinkedList<Integer> highScore;
+	/**
+	 * Lista sa imenima na rang listi kviza.
+	 */
 	private LinkedList<String> highScoreImena;
+	/**
+	 * Indikator da li su pitanja i rang lista ucitani.
+	 */
 	private boolean vecUcitano = false;
 	
+	/**
+	 * Konstruktor koji inicijalizuje liste ove klase.
+	 */
 	public LicitacijaLogika(){
 		prviNivo = new LinkedList<String>();
 		drugiNivo = new LinkedList<String>();
@@ -27,6 +52,10 @@ public class LicitacijaLogika {
 		highScoreImena = new LinkedList<String>();
 	}
 	
+	/**
+	 * Metoda za ucitavanje pitanja i rang liste u odgovarajuce atribute.
+	 * @throws Exception
+	 */
 	public void ucitajFajl() throws Exception {
 			if(!(prviNivo.isEmpty()))
 				prviNivo.remove();
@@ -91,6 +120,11 @@ public class LicitacijaLogika {
 			in1.close();
 	}
 
+	/**
+	 * Metoda koja vrsi izbor pitanja i vraca niz sa pitanjem i tacnim odgovorom.
+	 * @param brPitanja broj trenutnog pitanja u kvizu
+	 * @return niz sa pitanjem i tacnim odgovorom
+	 */
 	public String[] izaberiPitanje(int brPitanja) {
 		
 		if(brPitanja >= 10 && brPitanja <= 14){
@@ -166,22 +200,29 @@ public class LicitacijaLogika {
 		this.highScoreImena = highScoreImena;
 	}
 
+	/**
+	 * Meotda koja provera da li treba izvrsiti upis na rang listu kviza.
+	 * @param poeni koje su osvojeni u kvizu
+	 * @return -1 u slucaju da ne treba upisati, a u slucaju da treba odogovarajucu poziciju pocevsi od 0
+	 */
 	public int proveriIUpisiNaRangListu(int poeni) {
 		if(poeni > highScore.get(0)){
-//			highScore.addFirst(poeni);
-//			highScore.removeLast();
 			return 0;
 		}
 		for (int i = 0; i < highScore.size() - 1; i++) {
 			if(highScore.get(i) > poeni && highScore.get(i + 1) < poeni){
-//				highScore.add(i + 1, poeni);
-//				highScore.remove(10);
 				return i + 1;
 			}
 		}
 		return -1;
 	}
 
+	/**
+	 * Metoda vrsi upis broja poena i imena takmicara u odgovarajuce liste.
+	 * @param ime koje ce biti upisano
+	 * @param pozicija na koju ce takmicar biti upisan
+	 * @param poeni broj poena za upis
+	 */
 	public void upisiImeUListu(String ime, int pozicija,int poeni) {
 		highScoreImena.add(pozicija, ime);
 		highScore.add(pozicija, poeni);
@@ -189,6 +230,10 @@ public class LicitacijaLogika {
 		highScoreImena.removeLast();
 	}
 
+	/**
+	 * Metoda vraca string koji sadrzi rang listu.
+	 * @return string sa rang listom
+	 */
 	public String vratiRangListu() {
 		String s = new String();
 		for (int i = 0; i < highScore.size(); i++) {
@@ -196,7 +241,10 @@ public class LicitacijaLogika {
 		}
 		return s;
 	}
-
+	/**
+	 * Metoda omogucije serijalizaciju rang liste.
+	 * @throws Exception
+	 */
 	public void serijalizuj() throws Exception {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscore/licitacijeHighScore.txt")));
 		
