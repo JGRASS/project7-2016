@@ -183,8 +183,10 @@ public class LicitacijaLogika {
 	}
 
 	public void upisiImeUListu(String ime, int pozicija,int poeni) {
-		highScoreImena.set(pozicija, ime);
-		highScore.set(pozicija, poeni);
+		highScoreImena.add(pozicija, ime);
+		highScore.add(pozicija, poeni);
+		highScore.removeLast();
+		highScoreImena.removeLast();
 	}
 
 	public String vratiRangListu() {

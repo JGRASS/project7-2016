@@ -13,6 +13,9 @@ import javax.swing.ListSelectionModel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -30,6 +33,9 @@ public class LicitacijeProzor extends JFrame {
 	private JTextField txtOdgovor;
 	private JLabel lblPitanje;
 	private JButton btnPotvrdi;
+	private JLabel lblTacanOdgovor;
+	private JLabel lblTOdgovor;
+	
 
 	/**
 	 * Launch the application.
@@ -67,6 +73,8 @@ public class LicitacijeProzor extends JFrame {
 		contentPane.add(getTxtOdgovor());
 		contentPane.add(getLblPitanje());
 		contentPane.add(getBtnPotvrdi());
+		contentPane.add(getLblTacanOdgovor());
+		contentPane.add(getLblTOdgovor());
 		
 	}
 	private JScrollPane getScrollPane_1() {
@@ -137,14 +145,25 @@ public class LicitacijeProzor extends JFrame {
 						if(list.getSelectedIndex() == 0)
 							kraj = true;
 						int vrednost = GUIKontroler.proveraOdgovora(Integer.parseInt(txtOdgovor.getText()));
+						podesiVidljivostLabela(true);
+						lblTOdgovor.setText("" + GUIKontroler.vratiOdgovorLicitacije());
+						SwingUtilities.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e) {
+								}
+
+								txtOdgovor.setText("");
+								podesiVidljivostLabela(false);
+
+							}
+						});
 						int poeni = Integer.parseInt(lblBrojPoena.getText()) + vrednost;
 						lblBrojPoena.setText(Integer.toString(poeni));
 						list.setSelectedIndex(list.getSelectedIndex() - 1);
 
 						if(kraj){
-							/*JOptionPane.showMessageDialog(null, "Igra je zavrsena. Niste uspeli da se upise na rang listu. Broj poena koje"
-									+ " ste osvojili je: " + lblBrojPoena.getText() , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
-									*/
 							int poen = Integer.parseInt(lblBrojPoena.getText());
 							if(!GUIKontroler.daLiUpisatiNaRangListuLicitacija(poen)){
 								GUIKontroler.pokreniLicitacijeScoreDijalog(false, poeni);
@@ -154,16 +173,19 @@ public class LicitacijeProzor extends JFrame {
 							GUIKontroler.zatvoriProzor();
 						}else{
 							GUIKontroler.pronadjiOdgovorLicitacije();
+
 						}
-						
+
 					}catch(NumberFormatException nfe){
 						JOptionPane.showMessageDialog(null, "Greska pri unosu odgovora. Odgovor ne sme sadrzati "
 								+ "	znakovne vrednosti.","Greska pri unosu",JOptionPane.ERROR_MESSAGE);
+						podesiVidljivostLabela(false);
+
 					}
 				}
 			});
 			btnPotvrdi.setFont(new Font("Tahoma", Font.BOLD, 12));
-			btnPotvrdi.setBounds(158, 286, 103, 23);
+			btnPotvrdi.setBounds(158, 307, 103, 23);
 		}
 		return btnPotvrdi;
 	}
@@ -171,5 +193,29 @@ public class LicitacijeProzor extends JFrame {
 		if(list != null)
 			return (int) list.getSelectedIndex();
 		return -1;
+	}
+	
+	private void podesiVidljivostLabela(boolean vidljivost){
+		lblTacanOdgovor.setVisible(vidljivost);
+		lblTOdgovor.setVisible(vidljivost);
+	}
+	
+	private JLabel getLblTacanOdgovor() {
+		if (lblTacanOdgovor == null) {
+			lblTacanOdgovor = new JLabel("Tacan odgovor:");
+			lblTacanOdgovor.setVisible(false);
+			lblTacanOdgovor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			lblTacanOdgovor.setBounds(22, 258, 94, 25);
+		}
+		return lblTacanOdgovor;
+	}
+	private JLabel getLblTOdgovor() {
+		if (lblTOdgovor == null) {
+			lblTOdgovor = new JLabel("\r\n");
+			lblTOdgovor.setVisible(false);
+			lblTOdgovor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			lblTOdgovor.setBounds(118, 261, 66, 19);
+		}
+		return lblTOdgovor;
 	}
 }
