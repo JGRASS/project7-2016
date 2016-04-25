@@ -155,8 +155,12 @@ public class DopunskaLogika {
 				return new String[]{pitanje, odgovor};
 			}
 		}
-		
 	}
+	/**
+	 * Ucitava rang listu iz tekstualne datoteke i vraca je
+	 * @return listu rangiranja
+	 * @throws Exception
+	 */
 	public LinkedList<String> ucitajRangListu() throws Exception{
 		LinkedList<String> rank = new LinkedList<>();
 		BufferedReader in = new BufferedReader(new FileReader("fajlovi/rang_dopunska.txt"));
@@ -167,6 +171,11 @@ public class DopunskaLogika {
 		in.close();
 		return rank;
 	}
+	/**
+	 * U zavisnosti od ostvarenog skora upisuje takmicara u rang listu
+	 * @param imeTakmicara
+	 * @param skor
+	 */
 	public void ubaciURangListu(String imeTakmicara, String skor) {
 		LinkedList<String> rank = new LinkedList<>();
 		try {
@@ -200,6 +209,10 @@ public class DopunskaLogika {
 		}
 		osveziRangListu(rank);
 	}
+	/**
+	 * Upisuje prosledjenu rang listu u tekstualnu datoteku
+	 * @param rang lista
+	 */
 	private void osveziRangListu(LinkedList<String> rank) {
 		PrintWriter in;
 		try {

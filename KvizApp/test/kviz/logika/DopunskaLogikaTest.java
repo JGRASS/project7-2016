@@ -138,5 +138,23 @@ public class DopunskaLogikaTest {
 		assertEquals(true, t.contains(teza[0]));
 		assertEquals(true, t.contains(teza[1]));
 	}
-
+	
+	@Test
+	public void testUcitajRangListu() {
+		LinkedList<String> rank = new LinkedList<>();
+		LinkedList<String> r = new LinkedList<>();
+		BufferedReader in;
+		try {
+			in = new BufferedReader(new FileReader("fajlovi/rang_dopunska.txt"));
+			while(in.readLine()!=null){
+				rank.add(in.readLine());
+				rank.add(in.readLine());
+			}
+			in.close();
+			r = logika.ucitajRangListu();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertEquals(r, rank);
+	}
 }
