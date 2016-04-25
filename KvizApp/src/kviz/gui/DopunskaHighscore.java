@@ -51,7 +51,14 @@ public class DopunskaHighscore extends JFrame {
 		if (table == null) {
 			table = new JTable();
 			table.setEnabled(false);
-			table.setModel(new TableModelDopunskaRang(GUIKontroler.vratiRangListu()));
+			table.setModel(new TableModelDopunskaRang(GUIKontroler.vratiRangListu()) {
+				boolean[] columnEditables = new boolean[] {
+					false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
 		}
 		return table;
 	}

@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class DopunskaProzor extends JFrame {
 
@@ -34,6 +37,7 @@ public class DopunskaProzor extends JFrame {
 	private JTextField txtImeTakmicara;
 	private JButton btnPotvrdi;
 	private JMenuItem mntmRangLista;
+	private JMenuItem mntmExit;
 
 	/**
 	 * Launch the application.
@@ -55,8 +59,9 @@ public class DopunskaProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public DopunskaProzor() {
+		setResizable(false);
 		setTitle("Kviz pitalice na dopunu");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 487, 349);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -161,12 +166,14 @@ public class DopunskaProzor extends JFrame {
 			mnHelp.add(getMntmPravilaIgre());
 			mnHelp.add(getMntmRangLista());
 			mnHelp.add(getMntmAbout());
+			mnHelp.add(getMntmExit());
 		}
 		return mnHelp;
 	}
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_MASK));
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog(null, "Pitalice kreirao Sava Pejovic", "O autoru", JOptionPane.INFORMATION_MESSAGE);
@@ -178,6 +185,7 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmPravilaIgre() {
 		if (mntmPravilaIgre == null) {
 			mntmPravilaIgre = new JMenuItem("Pravila igre");
+			mntmPravilaIgre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 			mntmPravilaIgre.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JOptionPane.showMessageDialog(null, "Na postavljeno pitanje unosi se odgovor u odgovarajuce polje. " + 
@@ -227,6 +235,7 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmRangLista() {
 		if (mntmRangLista == null) {
 			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 			mntmRangLista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					GUIKontroler.pokreniProzorDopunskaHighscore();
@@ -235,5 +244,17 @@ public class DopunskaProzor extends JFrame {
 			});
 		}
 		return mntmRangLista;
+	}
+	private JMenuItem getMntmExit() {
+		if (mntmExit == null) {
+			mntmExit = new JMenuItem("Exit");
+			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.zatvoriProzorDopunska();
+				}
+			});
+		}
+		return mntmExit;
 	}
 }
