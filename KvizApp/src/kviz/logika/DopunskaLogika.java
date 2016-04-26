@@ -220,7 +220,7 @@ public class DopunskaLogika {
 			in.println("RANG LISTA");
 			for(int i = 0; i < rank.size(); i=i+2){
 				if(i+2 != rank.size()){
-					in.println(rank.get(i));
+					in.println(rank.get(i)); 
 					in.println(rank.get(i+1));
 					in.println("");
 				}else{

@@ -89,6 +89,15 @@ public class GUIKontroler {
 		zaokruzivanjeProzor = new PitanjaNaZaokruzivanje();
 		zaokruzivanjeProzor.setVisible(true);
 		zaokruzivanjeProzor.setLocationRelativeTo(null);
+		zaokruzivanjeProzor.getBtnA().setVisible(false);
+		zaokruzivanjeProzor.getBtnB().setVisible(false);
+		zaokruzivanjeProzor.getBtnC().setVisible(false);
+		zaokruzivanjeProzor.getBtnD().setVisible(false);
+		zaokruzivanjeProzor.getJtaPitanje().setVisible(false);
+		zaokruzivanjeProzor.getJtaA().setVisible(false);
+		zaokruzivanjeProzor.getJtaB().setVisible(false);
+		zaokruzivanjeProzor.getJtaC().setVisible(false);
+		zaokruzivanjeProzor.getJtaD().setVisible(false);
 		try{
 			zaokruzivanjeLogika.ucitajZaokruzivanjeFajl();
 //			zaokruzivanjeLogika.pitanja;
@@ -96,7 +105,8 @@ public class GUIKontroler {
 			e.printStackTrace();
 			//JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla pitalice.txt", "Greska", JOptionPane.WARNING_MESSAGE);
 		}
-		resetujPitanja();
+		redniBrPitanja = 0;
+//		resetujPitanja();
 		
 	}
 	public static void resetujPitanja(){
@@ -108,6 +118,17 @@ public class GUIKontroler {
 		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
 		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
 		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+		zaokruzivanjeProzor.getBtnA().setVisible(true);
+		zaokruzivanjeProzor.getBtnB().setVisible(true);
+		zaokruzivanjeProzor.getBtnC().setVisible(true);
+		zaokruzivanjeProzor.getBtnD().setVisible(true);
+		
+		zaokruzivanjeProzor.getJtaA().setVisible(true);
+		zaokruzivanjeProzor.getJtaB().setVisible(true);
+		zaokruzivanjeProzor.getJtaC().setVisible(true);
+		zaokruzivanjeProzor.getJtaD().setVisible(true);
+		
+		zaokruzivanjeProzor.getLblPrvoSlovo().setVisible(false);
 		zaokruzivanjeProzor.getLblBrPitanja().setText("Pitanje broj:" +(redniBrPitanja+1));
 		redniBrPitanja++;
 		

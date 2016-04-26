@@ -226,6 +226,7 @@ public class DopunskaProzor extends JFrame {
 					txtOdgovor.setVisible(true);
 					txtSkor.setVisible(true);
 					btnOk.setVisible(true);
+					
 				}
 			});
 			btnPotvrdi.setBounds(299, 90, 89, 23);
