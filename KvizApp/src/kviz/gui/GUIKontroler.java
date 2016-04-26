@@ -89,21 +89,12 @@ public class GUIKontroler {
 		zaokruzivanjeProzor = new PitanjaNaZaokruzivanje();
 		zaokruzivanjeProzor.setVisible(true);
 		zaokruzivanjeProzor.setLocationRelativeTo(null);
-		zaokruzivanjeProzor.getBtnA().setVisible(false);
-		zaokruzivanjeProzor.getBtnB().setVisible(false);
-		zaokruzivanjeProzor.getBtnC().setVisible(false);
-		zaokruzivanjeProzor.getBtnD().setVisible(false);
-		zaokruzivanjeProzor.getJtaPitanje().setVisible(false);
-		zaokruzivanjeProzor.getJtaA().setVisible(false);
-		zaokruzivanjeProzor.getJtaB().setVisible(false);
-		zaokruzivanjeProzor.getJtaC().setVisible(false);
-		zaokruzivanjeProzor.getJtaD().setVisible(false);
+		
 		try{
 			zaokruzivanjeLogika.ucitajZaokruzivanjeFajl();
-//			zaokruzivanjeLogika.pitanja;
 		}catch(Exception e){
-			e.printStackTrace();
-			//JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla pitalice.txt", "Greska", JOptionPane.WARNING_MESSAGE);
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Greska prilikom ucitavanja fajla pitalice.txt", "Greska", JOptionPane.WARNING_MESSAGE);
 		}
 		redniBrPitanja = 0;
 //		resetujPitanja();
@@ -118,21 +109,68 @@ public class GUIKontroler {
 		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
 		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
 		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+		
 		zaokruzivanjeProzor.getBtnA().setVisible(true);
 		zaokruzivanjeProzor.getBtnB().setVisible(true);
 		zaokruzivanjeProzor.getBtnC().setVisible(true);
 		zaokruzivanjeProzor.getBtnD().setVisible(true);
+//		zaokruzivanjeProzor.getBtnZamena().setVisible(true);
 		
+		zaokruzivanjeProzor.getJtaPitanje().setVisible(true);
 		zaokruzivanjeProzor.getJtaA().setVisible(true);
 		zaokruzivanjeProzor.getJtaB().setVisible(true);
 		zaokruzivanjeProzor.getJtaC().setVisible(true);
 		zaokruzivanjeProzor.getJtaD().setVisible(true);
 		
-		zaokruzivanjeProzor.getLblPrvoSlovo().setVisible(false);
+		zaokruzivanjeProzor.getLblBrPitanja().setVisible(true);
+		zaokruzivanjeProzor.getLblBrPoena().setVisible(true);
+		
 		zaokruzivanjeProzor.getLblBrPitanja().setText("Pitanje broj:" +(redniBrPitanja+1));
 		redniBrPitanja++;
 		
-
+	}
+	public static void refreshPoslePotvrde(){
+		resetujPitanja();
+		zaokruzivanjeProzor.getLblUnesiteIme().setVisible(false);
+		zaokruzivanjeProzor.getJtfUnesiteIme().setVisible(false);
+		zaokruzivanjeProzor.getBtnPotvrdiUnos().setVisible(false);
+		zaokruzivanjeProzor.getBtnZamena().setVisible(true);
+		zaokruzivanjeProzor.getBtn5050().setVisible(true);
+	}
+	public static void izbaciPitanja(){
+		int brojPromenjenih = 0;
+		if(!zaokruzivanjeProzor.getJtaA().getText().equals(vratiTacan())){
+			zaokruzivanjeProzor.getJtaA().setVisible(false);
+			zaokruzivanjeProzor.getBtnA().setVisible(false);
+			brojPromenjenih++;
+		}
+		if(!zaokruzivanjeProzor.getJtaB().getText().equals(vratiTacan())){
+			zaokruzivanjeProzor.getJtaB().setVisible(false);
+			zaokruzivanjeProzor.getBtnB().setVisible(false);
+			brojPromenjenih++;
+		}
+		if(!zaokruzivanjeProzor.getJtaC().getText().equals(vratiTacan()) && brojPromenjenih!=2){
+			zaokruzivanjeProzor.getJtaC().setVisible(false);
+			zaokruzivanjeProzor.getBtnC().setVisible(false);
+			brojPromenjenih++;
+		}
+		zaokruzivanjeProzor.getBtn5050().setVisible(false);
+	}
+	public static void zameniPitanje(){
+		pitanjaIOdg = zaokruzivanjeLogika.vratiPitanjaIOdgovore(15);
+		String[] odgovori = pitanjaIOdg[1].split("&");
+		zaokruzivanjeProzor.getJtaPitanje().setText(pitanjaIOdg[0]);
+		zaokruzivanjeProzor.getJtaA().setText(odgovori[0]);
+		zaokruzivanjeProzor.getJtaA().setVisible(true);
+		zaokruzivanjeProzor.getBtnA().setVisible(true);
+		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
+		zaokruzivanjeProzor.getJtaB().setVisible(true);
+		zaokruzivanjeProzor.getBtnB().setVisible(true);
+		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
+		zaokruzivanjeProzor.getJtaC().setVisible(true);
+		zaokruzivanjeProzor.getBtnC().setVisible(true);
+		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+	
 	}
 	public static String vratiTacan(){
 		return pitanjaIOdg[2];

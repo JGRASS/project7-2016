@@ -45,13 +45,12 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JButton btnPotvrdiUnos;
 	public String imeKorisnika;
 	private JButton btn5050;
-	private JButton btnPrvoSlovo;
-	private JLabel lblPrvoSlovo;
 	private JMenuBar menuBar;
 	private JMenu mnOIgri;
 	private JMenuItem mntmPravilaIgre;
 	private JMenuItem mntmAutorIgre;
 	private JMenuItem mntmIzadji;
+	private JButton btnZamena;
 //	private String[] pocetnaPitanja;
 //	private String[] pocetniOdgovori;
 
@@ -100,13 +99,14 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		contentPane.add(getJtfUnesiteIme());
 		contentPane.add(getBtnPotvrdiUnos());
 		contentPane.add(getBtn5050());
-		contentPane.add(getBtnPrvoSlovo());
-		contentPane.add(getLblPrvoSlovo());
+		contentPane.add(getBtnZamena());
 	}
 	public JButton getBtnA() {
 		if (btnA == null) {
 			btnA = new JButton("A");
+			btnA.setVisible(false);
 			btnA.addActionListener(new ActionListener() {
+				
 				public void actionPerformed(ActionEvent arg0) {
 					if(brojac<15){
 					if(jtaA.getText().equals(GUIKontroler.vratiTacan())){
@@ -132,6 +132,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		if (jtaA == null) {
 			jtaA = new JTextArea();
 			jtaA.setEditable(false);
+			jtaA.setVisible(false);
 			jtaA.setBounds(77, 194, 160, 30);
 //			jtaA.setText(pocetniOdgovori[0]);
 		}
@@ -141,6 +142,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		if (jtaB == null) {
 			jtaB = new JTextArea();
 			jtaB.setEditable(false);
+			jtaB.setVisible(false);
 			jtaB.setBounds(327, 194, 160, 30);
 		}
 		return jtaB;
@@ -148,6 +150,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JButton getBtnB() {
 		if (btnB == null) {
 			btnB = new JButton("B");
+			btnB.setVisible(false);
 			btnB.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(brojac<15){
@@ -174,6 +177,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		if (jtaC == null) {
 			jtaC = new JTextArea();
 			jtaC.setEditable(false);
+			jtaC.setVisible(false);
 			jtaC.setBounds(77, 254, 160, 30);
 		}
 		return jtaC;
@@ -181,6 +185,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JButton getBtnC() {
 		if (btnC == null) {
 			btnC = new JButton("C");
+			btnC.setVisible(false);
 			btnC.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(brojac<15){
@@ -205,6 +210,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JTextArea getJtaD() {
 		if (jtaD == null) {
 			jtaD = new JTextArea();
+			jtaD.setVisible(false);
 			jtaD.setEditable(false);
 			jtaD.setBounds(327, 254, 160, 30);
 		}
@@ -213,6 +219,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JButton getBtnD() {
 		if (btnD == null) {
 			btnD = new JButton("D");
+			btnD.setVisible(false);
 			btnD.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(brojac<15){
@@ -238,6 +245,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		if (jtaPitanje == null) {
 			jtaPitanje = new JTextArea();
 			jtaPitanje.setEditable(false);
+			jtaPitanje.setVisible(false);
 			jtaPitanje.setBounds(51, 65, 381, 57);
 			
 		}
@@ -246,6 +254,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JLabel getLblBrPitanja() {
 		if (lblBrPitanja == null) {
 			lblBrPitanja = new JLabel("Pitanje broj:1");
+			lblBrPitanja.setVisible(false);
 			lblBrPitanja.setBounds(51, 26, 103, 14);
 		}
 		return lblBrPitanja;
@@ -253,18 +262,19 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	public JLabel getLblBrPoena() {
 		if (lblBrPoena == null) {
 			lblBrPoena = new JLabel("Broj tacnih: 0");
+			lblBrPoena.setVisible(false);
 			lblBrPoena.setBounds(349, 26, 83, 14);
 		}
 		return lblBrPoena;
 	}
-	private JLabel getLblUnesiteIme() {
+	public JLabel getLblUnesiteIme() {
 		if (lblUnesiteIme == null) {
 			lblUnesiteIme = new JLabel("Unesite ime");
 			lblUnesiteIme.setBounds(66, 150, 77, 14);
 		}
 		return lblUnesiteIme;
 	}
-	private JTextField getJtfUnesiteIme() {
+	public JTextField getJtfUnesiteIme() {
 		if (jtfUnesiteIme == null) {
 			jtfUnesiteIme = new JTextField();
 			jtfUnesiteIme.setBounds(164, 147, 110, 20);
@@ -272,7 +282,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		}
 		return jtfUnesiteIme;
 	}
-	private JButton getBtnPotvrdiUnos() {
+	public JButton getBtnPotvrdiUnos() {
 		if (btnPotvrdiUnos == null) {
 			btnPotvrdiUnos = new JButton("Potvrdi unos");
 			btnPotvrdiUnos.addActionListener(new ActionListener() {
@@ -280,14 +290,8 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 					if(getJtfUnesiteIme().getText().equals("")){
 						JOptionPane.showMessageDialog(null, "Unesite ime u polje","Izvestaj", JOptionPane.WARNING_MESSAGE);
 					}else{
-						getJtaPitanje().setVisible(true);
-						GUIKontroler.resetujPitanja();
-						getLblUnesiteIme().setVisible(false);
-						getJtfUnesiteIme().setVisible(false);
-						getBtnPotvrdiUnos().setVisible(false);
-						getBtn5050().setVisible(true);
-						getBtnPrvoSlovo().setVisible(true);
-					imeKorisnika=jtfUnesiteIme.getText();
+						GUIKontroler.refreshPoslePotvrde();
+						imeKorisnika=jtfUnesiteIme.getText();
 					}
 				}
 			});
@@ -295,59 +299,18 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		}
 		return btnPotvrdiUnos;
 	}
-	private JButton getBtn5050() {
+	public JButton getBtn5050() {
 		if (btn5050 == null) {
 			btn5050 = new JButton("50/50");
 			btn5050.setVisible(false);
 			btn5050.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int brojPromenjenih = 0;
-					if(!jtaA.getText().equals(GUIKontroler.vratiTacan())){
-						jtaA.setVisible(false);
-						btnA.setVisible(false);
-						brojPromenjenih++;
-					}
-					if(!jtaB.getText().equals(GUIKontroler.vratiTacan())){
-						jtaB.setVisible(false);
-						btnB.setVisible(false);
-						brojPromenjenih++;
-					}
-					if(!jtaC.getText().equals(GUIKontroler.vratiTacan()) && brojPromenjenih!=2){
-						jtaC.setVisible(false);
-						btnC.setVisible(false);
-						brojPromenjenih++;
-					}
-					btn5050.setVisible(false);
+					GUIKontroler.izbaciPitanja();
 				}
 			});
 			btn5050.setBounds(118, 295, 100, 55);
 		}
 		return btn5050;
-	}
-	private JButton getBtnPrvoSlovo() {
-		if (btnPrvoSlovo == null) {
-			btnPrvoSlovo = new JButton("Slovo");
-			btnPrvoSlovo.setVisible(false);
-			btnPrvoSlovo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					lblPrvoSlovo.setText("PRVO SLOVO: " +GUIKontroler.vratiTacan().charAt(0));
-					lblPrvoSlovo.setVisible(true);
-					btnPrvoSlovo.setVisible(false);
-					
-				}
-			});
-			btnPrvoSlovo.setBounds(276, 295, 100, 55);
-		}
-		return btnPrvoSlovo;
-	}
-	public JLabel getLblPrvoSlovo() {
-		if (lblPrvoSlovo == null) {
-			lblPrvoSlovo = new JLabel("");
-			lblPrvoSlovo.setFont(new Font("Tahoma", Font.BOLD, 15));
-			lblPrvoSlovo.setVisible(false);
-			lblPrvoSlovo.setBounds(174, 162, 138, 14);
-		}
-		return lblPrvoSlovo;
 	}
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
@@ -374,7 +337,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 
 						JOptionPane.showMessageDialog(null, "Kviz na temu informacionih tehnologija. " +'\n' + 
 						"Sastoji se od 15 pitanja, svako pitanje donosi tacno jedan poen" + "\n" + 
-						"Moguce dve vrste pomoci, '50/50' (uklanja dva netacna odgovora) i 'Slovo' (Pokazuje prvo slovo tacnog odgovora)"+"\n"+
+						"Moguce dve vrste pomoci, '50/50' (uklanja dva netacna odgovora) i 'Zamena' (Menja trenutno pitanje novim pitanjem)"+"\n"+
 						"Srecno!", "O igri", JOptionPane.INFORMATION_MESSAGE);
 					
 				}
@@ -406,5 +369,20 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			
 		}
 		return mntmIzadji;
+	}
+	public JButton getBtnZamena() {
+		if (btnZamena == null) {
+			btnZamena = new JButton("Zamena");
+			btnZamena.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.zameniPitanje();
+					
+					btnZamena.setVisible(false);
+				}
+			});
+			btnZamena.setVisible(false);
+			btnZamena.setBounds(266, 295, 100, 55);
+		}
+		return btnZamena;
 	}
 }
