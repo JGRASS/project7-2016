@@ -35,8 +35,11 @@ public class LicitacijaLogika {
 	 * @throws Exception
 	 */
 	public void ucitajFajl() throws Exception {
-			SOUcitajFajl.izvrsi(pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), pitanjaLicitacije.getTreciNivo(),
-									highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena());
+/*			SOUcitajFajl.izvrsi(pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), pitanjaLicitacije.getTreciNivo(),
+									highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena()); */
+			SOUcitajFajl.ucitajTxtFajl(pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), pitanjaLicitacije.getTreciNivo());
+			SOUcitajFajl.deserijalizujRangListuPoena(highScoreLicitacije.getHighScore());
+			SOUcitajFajl.deserijalizujRangListuImena(highScoreLicitacije.getHighScoreImena());
 	}
 
 	/**
@@ -82,7 +85,9 @@ public class LicitacijaLogika {
 	 * @throws Exception
 	 */
 	public void serijalizuj() throws Exception {
-		SOSerijalizuj.izvrsi(highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena());	
+//		SOSerijalizuj.izvrsi(highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena());
+		SOSerijalizuj.serijalizujPoeneRangListe(highScoreLicitacije.getHighScore());
+		SOSerijalizuj.serijalizujImenaRangListe( highScoreLicitacije.getHighScoreImena());
 	}
 
 	public PitanjaLicitacije getPitanjaLicitacije() {

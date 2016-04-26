@@ -4,6 +4,14 @@ import java.util.LinkedList;
 
 public class SOIzaberiPitanje {
 	
+	/**
+	 * Metoda u zavisnosti od broja pitanja(koje je trenutno u kvizu) bira pitanje iz odgovarajuce liste.
+	 * @param brPitanja
+	 * @param prviNivo lista pitanja prvog nivoa
+	 * @param drugiNivo lista pitanja drugog nivoa
+	 * @param treciNivo lista pitanja treceg nivoa
+	 * @return niz sa pitanjem i odgovorom
+	 */
 	public static String[] izvrsi(int brPitanja, LinkedList<String> prviNivo, LinkedList<String> drugiNivo,
 								LinkedList<String> treciNivo) {
 

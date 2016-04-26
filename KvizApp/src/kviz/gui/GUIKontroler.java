@@ -1,9 +1,12 @@
 package kviz.gui;
 
 import java.awt.EventQueue;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 
@@ -79,12 +82,29 @@ public class GUIKontroler {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					glavniProzor = new GlavniProzor();
+     				glavniProzor = new GlavniProzor();
 					glavniProzor.setVisible(true);
 					licitacijeLogika = new LicitacijaLogika();
 					dopunskaLogika = new DopunskaLogika();
 					dopunskaProzor = new DopunskaProzor();
 					zaokruzivanjeLogika = new ZaokruzivanjeLogika();
+/*					LinkedList<String> highScoreImena = new LinkedList<>();
+					LinkedList<Integer> highScore = new LinkedList<>();
+					for (int i = 0; i < 10; i++) {
+						highScoreImena.add("N/A");
+					}
+					Integer broj = 110;
+					for (int i = 0; i < 10; i++) {
+						broj -= 10;
+						highScore.add(broj);
+					}
+					ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("highscore/highScorePoeni.out")));
+					out.writeObject(highScore);
+					out.close();
+					
+					ObjectOutputStream out1 = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("highscore/highScoreImena.out")));
+					out1.writeObject(highScoreImena);
+					out1.close();*/
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
