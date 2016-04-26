@@ -12,9 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class LicitacijaLogikaTest {
+public class LicitacijaLogikaTest1 {
 	
-	private LicitacijaLogika licitacije;
+/*	private LicitacijaLogika licitacije;
 
 	@Before
 	public void setUp() throws Exception {
@@ -253,5 +253,5 @@ public class LicitacijaLogikaTest {
 		int vrednost = licitacije.proveriIUpisiNaRangListu(poeni);
 		
 		assertEquals(vrednost, -1);
-	}
+	} */
 }
