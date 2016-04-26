@@ -91,7 +91,6 @@ public class LicitacijaLogika {
 			BufferedReader in1 = new BufferedReader(f1);
 			
 			int r = 0;
-			String s;
 			if(!vecUcitano){
 				boolean kraj1 = false;
 				while(!kraj1){
@@ -171,18 +170,24 @@ public class LicitacijaLogika {
 		return prviNivo;
 	}
 	public void setPrviNivo(LinkedList<String> prviNivo) {
+		if(prviNivo == null)
+			throw new RuntimeException("Greska prilikom inicijalizacije liste");
 		this.prviNivo = prviNivo;
 	}
 	public LinkedList<String> getDrugiNivo() {
 		return drugiNivo;
 	}
 	public void setDrugiNivo(LinkedList<String> drugiNivo) {
+		if(drugiNivo == null)
+			throw new RuntimeException("Greska prilikom inicijalizacije liste");
 		this.drugiNivo = drugiNivo;
 	}
 	public LinkedList<String> getTreciNivo() {
 		return treciNivo;
 	}
 	public void setTreciNivo(LinkedList<String> treciNivo) {
+		if(treciNivo == null)
+			throw new RuntimeException("Greska prilikom inicijalizacije liste");
 		this.treciNivo = treciNivo;
 	}
 	public LinkedList<Integer> getHighScore() {
