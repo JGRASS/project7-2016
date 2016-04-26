@@ -1,6 +1,6 @@
 RANG LISTA
-EMPTY
-0
+svrle burazer
+1
 
 EMPTY
 0
