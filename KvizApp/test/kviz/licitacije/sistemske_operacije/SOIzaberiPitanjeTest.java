@@ -43,7 +43,7 @@ public class SOIzaberiPitanjeTest {
 				break;
 		}
 		if(random < 0 || random > licitacije.getPitanjaLicitacije().getPrviNivo().size())
-			throw new RuntimeException("Izvecuni broj nije u dozvoljenom rangu");
+			fail("Izvecuni broj nije u dozvoljenom rangu");
 		String pitanje = licitacije.getPitanjaLicitacije().getPrviNivo().get(0);
 		String odgovor = licitacije.getPitanjaLicitacije().getPrviNivo().get(1);
 		String[] niz = new String[]{pitanje, odgovor};
@@ -66,7 +66,7 @@ public class SOIzaberiPitanjeTest {
 				break;
 		}
 		if(random < 0 || random > licitacije.getPitanjaLicitacije().getDrugiNivo().size())
-			throw new RuntimeException("Izvecuni broj nije u dozvoljenom rangu");
+			fail("Izvecuni broj nije u dozvoljenom rangu");
 		String pitanje = licitacije.getPitanjaLicitacije().getDrugiNivo().get(0);
 		String odgovor = licitacije.getPitanjaLicitacije().getDrugiNivo().get(1);
 		String[] niz = new String[]{pitanje, odgovor};
@@ -89,7 +89,7 @@ public class SOIzaberiPitanjeTest {
 				break;
 		}
 		if(random < 0 || random > licitacije.getPitanjaLicitacije().getTreciNivo().size())
-			throw new RuntimeException("Izvecuni broj nije u dozvoljenom rangu");
+			fail("Izvecuni broj nije u dozvoljenom rangu");
 		String pitanje = licitacije.getPitanjaLicitacije().getTreciNivo().get(0);
 		String odgovor = licitacije.getPitanjaLicitacije().getTreciNivo().get(1);
 		String[] niz = new String[]{pitanje, odgovor};

@@ -16,7 +16,9 @@ public class SOUpisiImeUListu {
 								LinkedList<String> highScoreImena) {
 		highScoreImena.add(pozicija, ime);
 		highScore.add(pozicija, poeni);
-		highScore.removeLast();
-		highScoreImena.removeLast();
+		if(highScore.size() > 10 && highScoreImena.size() > 10){
+			highScore.removeLast();
+			highScoreImena.removeLast();
+		}
 	}
 }
