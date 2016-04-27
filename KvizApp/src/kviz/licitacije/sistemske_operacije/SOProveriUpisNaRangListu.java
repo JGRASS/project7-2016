@@ -2,6 +2,11 @@ package kviz.licitacije.sistemske_operacije;
 
 import java.util.LinkedList;
 
+/**
+ * 
+ * @author Marko
+ *
+ */
 public class SOProveriUpisNaRangListu {
 	
 	/**
