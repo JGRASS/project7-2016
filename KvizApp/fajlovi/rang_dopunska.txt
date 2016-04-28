@@ -1,9 +1,9 @@
 RANG LISTA
+sava
+3
+
 svrle burazer
 1
-
-EMPTY
-0
 
 EMPTY
 0

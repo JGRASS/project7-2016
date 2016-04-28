@@ -120,11 +120,12 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 					if(jtaA.getText().equals(GUIKontroler.vratiTacan())) brojTacnih++;
 					JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
 							+ " ste osvojili je: " +brojTacnih , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+					GUIKontroler.zaokruzivanjeRangLista();
 					GUIKontroler.zatvoriZaokruzivanjeProzor();
 				}
 				}
 			});
-			btnA.setBounds(10, 194, 46, 30);
+			btnA.setBounds(10, 175, 46, 30);
 		}
 		return btnA;
 	}
@@ -133,7 +134,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			jtaA = new JTextArea();
 			jtaA.setEditable(false);
 			jtaA.setVisible(false);
-			jtaA.setBounds(77, 194, 160, 30);
+			jtaA.setBounds(77, 175, 160, 30);
 //			jtaA.setText(pocetniOdgovori[0]);
 		}
 		return jtaA;
@@ -143,7 +144,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			jtaB = new JTextArea();
 			jtaB.setEditable(false);
 			jtaB.setVisible(false);
-			jtaB.setBounds(327, 194, 160, 30);
+			jtaB.setBounds(327, 175, 160, 30);
 		}
 		return jtaB;
 	}
@@ -164,12 +165,13 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}else{
 					JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
 							+ " ste osvojili je: " +brojTacnih , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+					GUIKontroler.zaokruzivanjeRangLista();
 					GUIKontroler.zatvoriZaokruzivanjeProzor();
 				}
 				}
 				
 			});
-			btnB.setBounds(266, 194, 46, 30);
+			btnB.setBounds(266, 175, 46, 30);
 		}
 		return btnB;
 	}
@@ -178,7 +180,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			jtaC = new JTextArea();
 			jtaC.setEditable(false);
 			jtaC.setVisible(false);
-			jtaC.setBounds(77, 254, 160, 30);
+			jtaC.setBounds(77, 235, 160, 30);
 		}
 		return jtaC;
 	}
@@ -199,11 +201,12 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}else{
 					JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
 							+ " ste osvojili je: " +brojTacnih , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+					GUIKontroler.zaokruzivanjeRangLista();
 					GUIKontroler.zatvoriZaokruzivanjeProzor();
 				}
 				}
 			});
-			btnC.setBounds(10, 254, 46, 30);
+			btnC.setBounds(10, 235, 46, 30);
 		}
 		return btnC;
 	}
@@ -212,7 +215,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			jtaD = new JTextArea();
 			jtaD.setVisible(false);
 			jtaD.setEditable(false);
-			jtaD.setBounds(327, 254, 160, 30);
+			jtaD.setBounds(327, 235, 160, 30);
 		}
 		return jtaD;
 	}
@@ -233,20 +236,23 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}else{
 					JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
 							+ " ste osvojili je: " +brojTacnih , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+					GUIKontroler.zaokruzivanjeRangLista();
 					GUIKontroler.zatvoriZaokruzivanjeProzor();
 				}
 				}
 			});
-			btnD.setBounds(266, 254, 46, 30);
+			btnD.setBounds(266, 235, 46, 30);
 		}
 		return btnD;
 	}
 	public JTextArea getJtaPitanje() {
 		if (jtaPitanje == null) {
 			jtaPitanje = new JTextArea();
+			jtaPitanje.setAlignmentX(CENTER_ALIGNMENT);
+			jtaPitanje.setAlignmentY(CENTER_ALIGNMENT);
 			jtaPitanje.setEditable(false);
 			jtaPitanje.setVisible(false);
-			jtaPitanje.setBounds(51, 65, 381, 57);
+			jtaPitanje.setBounds(51, 65, 381, 60);
 			
 		}
 		return jtaPitanje;
@@ -384,5 +390,8 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnZamena.setBounds(266, 295, 100, 55);
 		}
 		return btnZamena;
+	}
+	public String getBrTacnih(){
+		return brojTacnih+"";
 	}
 }

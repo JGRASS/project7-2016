@@ -263,6 +263,10 @@ public class GUIKontroler {
 	public static void rangLista() {
 		dopunskaLogika.ubaciURangListu(dopunskaProzor.getTxtImeTakmicara().getText(),dopunskaProzor.getTxtSkor().getText());
 	}
+	public static void zaokruzivanjeRangLista(){
+		zaokruzivanjeLogika.ubaciURangListu(zaokruzivanjeProzor.getJtfUnesiteIme().getText(),
+				zaokruzivanjeProzor.getBrTacnih());
+	}
 	public static void pokreniProzorDopunskaHighscore() {
 		dopunskaProzorRang = new DopunskaHighscore();
 		dopunskaProzorRang.setVisible(true);
