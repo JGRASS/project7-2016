@@ -23,6 +23,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import java.awt.Color;
 
 public class PitanjaNaZaokruzivanje extends JFrame {
 
@@ -51,6 +52,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JMenuItem mntmAutorIgre;
 	private JMenuItem mntmIzadji;
 	private JButton btnZamena;
+	private Thread thread;
 //	private String[] pocetnaPitanja;
 //	private String[] pocetniOdgovori;
 
@@ -100,18 +102,22 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		contentPane.add(getBtnPotvrdiUnos());
 		contentPane.add(getBtn5050());
 		contentPane.add(getBtnZamena());
+		thread = new Thread();
 	}
 	public JButton getBtnA() {
 		if (btnA == null) {
 			btnA = new JButton("A");
+			
 			btnA.setVisible(false);
 			btnA.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent arg0) {
 					if(brojac<15){
 					if(jtaA.getText().equals(GUIKontroler.vratiTacan())){
+						btnA.setForeground(Color.BLACK);
 						brojTacnih++;
 						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
+						
 					}
 					
 					brojac++;

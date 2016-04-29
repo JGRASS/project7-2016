@@ -101,7 +101,7 @@ public class GUIKontroler {
 		
 	}
 	public static void resetujPitanja(){
-		
+
 		pitanjaIOdg = zaokruzivanjeLogika.vratiPitanjaIOdgovore(redniBrPitanja);
 		String[] odgovori = pitanjaIOdg[1].split("&");
 		zaokruzivanjeProzor.getJtaPitanje().setText(pitanjaIOdg[0]);

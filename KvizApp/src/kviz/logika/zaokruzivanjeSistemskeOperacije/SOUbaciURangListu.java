@@ -22,8 +22,8 @@ public class SOUbaciURangListu {
 		boolean unet = false;
 		for(int i = 1; i < rank.size(); i=i+2){
 			if(Integer.parseInt(rank.get(i)) < Integer.parseInt(skor)){
-				rank.add(i-1, imeTakmicara);
 				rank.add(i-1, skor);
+				rank.add(i-1, imeTakmicara);
 				unet = true;
 				osveziRangListu(rank);
 				break;
