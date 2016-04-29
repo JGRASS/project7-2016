@@ -66,20 +66,28 @@ public class LicitacijeScoreDijalog extends JDialog {
 	}
 	
 	private void srediFormu(boolean button, int poeni) {
-		if(button == true){
-			indikator = true;
-			btnOk.setVisible(true);
-			btnCancel.setVisible(false);
-			lblNaslovna.setText("Broj poena koje ste osvojili je " + poeni+ ". Upisite svoje ime u odgovarajuce polje.");
-			this.poeni = poeni;
-		}else{
-			indikator = false;
+		if(!button && poeni == -1){
 			btnOk.setVisible(false);
-			btnCancel.setVisible(true);
 			lblUpisiteVaseIme.setVisible(false);
 			txtIme.setVisible(false);
-			lblNaslovna.setText("Broj poena koje ste osvojili je " + poeni+ ". Niste uspeli da se upisete na rang listu");
-			this.poeni = poeni;
+			btnCancel.setVisible(true);
+			lblNaslovna.setText("");
+		}else{
+			if(button == true){
+				indikator = true;
+				btnOk.setVisible(true);
+				btnCancel.setVisible(false);
+				lblNaslovna.setText("Broj poena koje ste osvojili je " + poeni+ ". Upisite svoje ime u odgovarajuce polje.");
+				this.poeni = poeni;
+			}else{
+				indikator = false;
+				btnOk.setVisible(false);
+				btnCancel.setVisible(true);
+				lblUpisiteVaseIme.setVisible(false);
+				txtIme.setVisible(false);
+				lblNaslovna.setText("Broj poena koje ste osvojili je " + poeni+ ". Niste uspeli da se upisete na rang listu");
+				this.poeni = poeni;
+			}
 		}
 		textAreaRangLista.setText(GUIKontroler.rangListaLicitacije());
 	}

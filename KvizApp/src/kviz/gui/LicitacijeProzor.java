@@ -21,6 +21,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class LicitacijeProzor extends JFrame {
 
@@ -35,6 +41,12 @@ public class LicitacijeProzor extends JFrame {
 	private JButton btnPotvrdi;
 	private JLabel lblTacanOdgovor;
 	private JLabel lblTOdgovor;
+	private JMenuBar menuBar;
+	private JMenu mnMenu;
+	private JMenuItem mntmRangLista;
+	private JMenuItem mntmAbout;
+	private JMenuItem mntmPravilaIgra;
+	private JMenuItem mntmExit;
 	
 
 	/**
@@ -59,8 +71,9 @@ public class LicitacijeProzor extends JFrame {
 	public LicitacijeProzor() {
 		setTitle("Kviz - licitacije");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 532, 392);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 532, 413);
+		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(50, 50));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -150,7 +163,7 @@ public class LicitacijeProzor extends JFrame {
 						SwingUtilities.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									Thread.sleep(500);
+									Thread.sleep(1000);
 								} catch (InterruptedException e) {
 								}
 
@@ -185,7 +198,7 @@ public class LicitacijeProzor extends JFrame {
 				}
 			});
 			btnPotvrdi.setFont(new Font("Tahoma", Font.BOLD, 12));
-			btnPotvrdi.setBounds(158, 307, 103, 23);
+			btnPotvrdi.setBounds(157, 320, 103, 23);
 		}
 		return btnPotvrdi;
 	}
@@ -217,5 +230,74 @@ public class LicitacijeProzor extends JFrame {
 			lblTOdgovor.setBounds(118, 261, 66, 19);
 		}
 		return lblTOdgovor;
+	}
+	private JMenuBar getMenuBar_1() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+			menuBar.add(getMnMenu());
+		}
+		return menuBar;
+	}
+	private JMenu getMnMenu() {
+		if (mnMenu == null) {
+			mnMenu = new JMenu("Menu");
+			mnMenu.setMnemonic('M');
+			mnMenu.add(getMntmPravilaIgra());
+			mnMenu.add(getMntmRangLista());
+			mnMenu.add(getMntmAbout());
+			mnMenu.addSeparator();
+			mnMenu.add(getMntmExit());
+		}
+		return mnMenu;
+	}
+	private JMenuItem getMntmRangLista() {
+		if (mntmRangLista == null) {
+			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+			mntmRangLista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.pokreniLicitacijeScoreDijalog(false, -1);
+				}
+			});
+		}
+		return mntmRangLista;
+	}
+	private JMenuItem getMntmAbout() {
+		if (mntmAbout == null) {
+			mntmAbout = new JMenuItem("About");
+			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Kviz licitacije je uradjen od strane studenta Marka Popovica.", "About", JOptionPane.PLAIN_MESSAGE);
+				}
+			});
+		}
+		return mntmAbout;
+	}
+	private JMenuItem getMntmPravilaIgra() {
+		if (mntmPravilaIgra == null) {
+			mntmPravilaIgra = new JMenuItem("Pravila igra");
+			mntmPravilaIgra.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
+			mntmPravilaIgra.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Kviz je podeljen na 3 nivo. Pitanja 1-5 su pitanja najlakseg niva,"
+							+ "	pitanja 6-10 srednjeg, a pitanja 11-15 najtezeg nivoa. U zavisnosti od odgovora, na jednom pitanju mozete"
+							+ " osvojiti 10, 5, 3 ili 0 poena.", "Pravila igra", JOptionPane.PLAIN_MESSAGE);
+				}
+			});
+		}
+		return mntmPravilaIgra;
+	}
+	private JMenuItem getMntmExit() {
+		if (mntmExit == null) {
+			mntmExit = new JMenuItem("Exit");
+			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					LicitacijeProzor.this.dispose();
+				}
+			});
+		}
+		return mntmExit;
 	}
 }
