@@ -1,108 +1,114 @@
 package kviz.logika;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import kviz.licitacije.HighScoreLicitacije;
+import kviz.licitacije.PitanjaLicitacije;
+import kviz.licitacije.sistemske_operacije.SOIzaberiPitanje;
+import kviz.licitacije.sistemske_operacije.SOProveriUpisNaRangListu;
+import kviz.licitacije.sistemske_operacije.SOSerijalizuj;
+import kviz.licitacije.sistemske_operacije.SOUcitajFajl;
+import kviz.licitacije.sistemske_operacije.SOUpisiImeUListu;
+import kviz.licitacije.sistemske_operacije.SOVratiRangListu;
+/**
+ * Klasa koja predstavlja logiku kviza licitacije.
+ * @author Marko
+ *
+ */
 public class LicitacijaLogika {
-	private LinkedList<String> prviNivo;
-	private LinkedList<String> drugiNivo;
-	private LinkedList<String> treciNivo;
 	
-	public LicitacijaLogika(){
-		prviNivo = new LinkedList<String>();
-		drugiNivo = new LinkedList<String>();
-		treciNivo = new LinkedList<String>();
-	}
+	private PitanjaLicitacije pitanjaLicitacije = new PitanjaLicitacije();
+	private HighScoreLicitacije highScoreLicitacije = new HighScoreLicitacije();
 	
+	
+	/**
+	 * Metoda za ucitavanje pitanja i rang liste u odgovarajuce atribute.
+	 * @throws Exception
+	 */
 	public void ucitajFajl() throws Exception {
-		
-			FileReader f = new FileReader("fajlovi/licitacije.txt");
-			BufferedReader in = new BufferedReader(f);
-			
-			boolean kraj = false;
-
-			while(in.readLine().equals("1")){
-				prviNivo.add(in.readLine());
-				prviNivo.add(in.readLine());
-			}
-			do {
-				drugiNivo.add(in.readLine());
-				drugiNivo.add(in.readLine());
-			} while (in.readLine().equals("2"));
-			while(!kraj){
-				treciNivo.add(in.readLine());
-				treciNivo.add(in.readLine());
-				if(in.readLine() == null){
-					kraj = true;
-				}
-			}
-			
-			in.close();
+/*			SOUcitajFajl.izvrsi(pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), pitanjaLicitacije.getTreciNivo(),
+									highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena()); */
+			SOUcitajFajl.ucitajTxtFajl(pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), pitanjaLicitacije.getTreciNivo());
+			SOUcitajFajl.deserijalizujRangListuPoena(highScoreLicitacije.getHighScore());
+			SOUcitajFajl.deserijalizujRangListuImena(highScoreLicitacije.getHighScoreImena());
 	}
 
+	/**
+	 * Metoda koja vrsi izbor pitanja i vraca niz sa pitanjem i tacnim odgovorom.
+	 * @param brPitanja broj trenutnog pitanja u kvizu
+	 * @return niz sa pitanjem i tacnim odgovorom
+	 */
 	public String[] izaberiPitanje(int brPitanja) {
-		
-		if(brPitanja >= 10 && brPitanja <= 14){
-			int random;
-			while(true){
-				random = (int )(Math.random() * prviNivo.size());
-				if(random % 2 == 0)
-					break;
-			}
-			String pitanje = prviNivo.get(random);
-			String odgovor = prviNivo.get(random + 1);
-			prviNivo.remove(random);
-			prviNivo.remove(random);
-			return new String[]{pitanje, odgovor};
-			
-		}else if(brPitanja >= 5 && brPitanja <= 9){
-			int random;
-			while(true){
-				random = (int )(Math.random() * drugiNivo.size());
-				if(random % 2 == 0)
-					break;
-			}
-			String pitanje = drugiNivo.get(random);
-			String odgovor = drugiNivo.get(random + 1);
-			drugiNivo.remove(random);
-			drugiNivo.remove(random);
-			return new String[]{pitanje, odgovor};
-		}else{
-			int random;
-			while(true){
-				random = (int )(Math.random() * treciNivo.size());
-				if(random % 2 == 0)
-					break;
-			}
-			String pitanje = treciNivo.get(random);
-			String odgovor = treciNivo.get(random + 1);
-			treciNivo.remove(random);
-			treciNivo.remove(random);
-			return new String[]{pitanje, odgovor};
-		}
+		return SOIzaberiPitanje.izvrsi(brPitanja, pitanjaLicitacije.getPrviNivo(), pitanjaLicitacije.getDrugiNivo(), 
+							pitanjaLicitacije.getTreciNivo());
+	}
+
+	/**
+	 * Meotda koja provera da li treba izvrsiti upis na rang listu kviza.
+	 * @param poeni koje su osvojeni u kvizu
+	 * @return -1 u slucaju da ne treba upisati, a u slucaju da treba odogovarajucu poziciju pocevsi od 0
+	 */
+	public int proveriIUpisiNaRangListu(int poeni) {
+		return SOProveriUpisNaRangListu.izvrsi(poeni, highScoreLicitacije.getHighScore());
+	}
+
+	/**
+	 * Metoda vrsi upis broja poena i imena takmicara u odgovarajuce liste.
+	 * @param ime koje ce biti upisano
+	 * @param pozicija na koju ce takmicar biti upisan
+	 * @param poeni broj poena za upis
+	 */
+	public void upisiImeUListu(String ime, int pozicija,int poeni) {
+		SOUpisiImeUListu.izvrsi(ime, pozicija, poeni, highScoreLicitacije.getHighScore()
+								,highScoreLicitacije.getHighScoreImena());
+	}
+
+	/**
+	 * Metoda vraca string koji sadrzi rang listu.
+	 * @return string sa rang listom
+	 */
+	public String vratiRangListu() {
+		return SOVratiRangListu.izvrsi(highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena());
 	}
 	
-	public LinkedList<String> getPrviNivo() {
-		return prviNivo;
+	/**
+	 * Metoda omogucije serijalizaciju rang liste.
+	 * @throws Exception
+	 */
+	public void serijalizuj() throws Exception {
+//		SOSerijalizuj.izvrsi(highScoreLicitacije.getHighScore(), highScoreLicitacije.getHighScoreImena());
+		SOSerijalizuj.serijalizujPoeneRangListe(highScoreLicitacije.getHighScore());
+		SOSerijalizuj.serijalizujImenaRangListe( highScoreLicitacije.getHighScoreImena());
 	}
-	public void setPrviNivo(LinkedList<String> prviNivo) {
-		this.prviNivo = prviNivo;
+
+	public PitanjaLicitacije getPitanjaLicitacije() {
+		return pitanjaLicitacije;
 	}
-	public LinkedList<String> getDrugiNivo() {
-		return drugiNivo;
+
+	public void setPitanjaLicitacije(PitanjaLicitacije pitanjaLicitacije) {
+		if(pitanjaLicitacije == null)
+			throw new RuntimeException("Greska prilikom inicijalizacije.");
+		this.pitanjaLicitacije = pitanjaLicitacije;
 	}
-	public void setDrugiNivo(LinkedList<String> drugiNivo) {
-		this.drugiNivo = drugiNivo;
+
+	public HighScoreLicitacije getHighScoreLicitacije() {
+		return highScoreLicitacije;
 	}
-	public LinkedList<String> getTreciNivo() {
-		return treciNivo;
+
+	public void setHighScoreLicitacije(HighScoreLicitacije highScoreLicitacije) {
+		if(highScoreLicitacije == null)
+			throw new RuntimeException("Greska prilikom inicijalizacije.");
+		this.highScoreLicitacije = highScoreLicitacije;
 	}
-	public void setTreciNivo(LinkedList<String> treciNivo) {
-		this.treciNivo = treciNivo;
-	}
+	
+	
 }
