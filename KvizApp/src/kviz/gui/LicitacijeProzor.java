@@ -268,7 +268,7 @@ public class LicitacijeProzor extends JFrame {
 			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(getContentPane(), "Kviz licitacije je uradjen od strane studenta Marka Popovica.", "About", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(getContentPane(), "Autor kviza licitacije: Marko Popovic.", "About", JOptionPane.PLAIN_MESSAGE);
 				}
 			});
 		}
@@ -280,8 +280,8 @@ public class LicitacijeProzor extends JFrame {
 			mntmPravilaIgra.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 			mntmPravilaIgra.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JOptionPane.showMessageDialog(getContentPane(), "Kviz je podeljen na 3 nivo. Pitanja 1-5 su pitanja najlakseg niva,"
-							+ "	pitanja 6-10 srednjeg, a pitanja 11-15 najtezeg nivoa. U zavisnosti od odgovora, na jednom pitanju mozete"
+					JOptionPane.showMessageDialog(getContentPane(), "Kviz je podeljen na 3 nivo." + "\n" + "Pitanja 1-5 su pitanja najlakseg niva,"
+							+ "	pitanja 6-10 srednjeg, a pitanja 11-15 najtezeg nivoa." + "\n" + "U zavisnosti od odgovora, na jednom pitanju mozete"
 							+ " osvojiti 10, 5, 3 ili 0 poena.", "Pravila igra", JOptionPane.PLAIN_MESSAGE);
 				}
 			});
