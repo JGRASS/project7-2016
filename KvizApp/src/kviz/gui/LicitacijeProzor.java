@@ -13,11 +13,20 @@ import javax.swing.ListSelectionModel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class LicitacijeProzor extends JFrame {
 
@@ -30,6 +39,15 @@ public class LicitacijeProzor extends JFrame {
 	private JTextField txtOdgovor;
 	private JLabel lblPitanje;
 	private JButton btnPotvrdi;
+	private JLabel lblTacanOdgovor;
+	private JLabel lblTOdgovor;
+	private JMenuBar menuBar;
+	private JMenu mnMenu;
+	private JMenuItem mntmRangLista;
+	private JMenuItem mntmAbout;
+	private JMenuItem mntmPravilaIgra;
+	private JMenuItem mntmExit;
+	
 
 	/**
 	 * Launch the application.
@@ -53,8 +71,9 @@ public class LicitacijeProzor extends JFrame {
 	public LicitacijeProzor() {
 		setTitle("Kviz - licitacije");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 532, 392);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 532, 413);
+		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setPreferredSize(new Dimension(50, 50));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,6 +86,8 @@ public class LicitacijeProzor extends JFrame {
 		contentPane.add(getTxtOdgovor());
 		contentPane.add(getLblPitanje());
 		contentPane.add(getBtnPotvrdi());
+		contentPane.add(getLblTacanOdgovor());
+		contentPane.add(getLblTOdgovor());
 		
 	}
 	private JScrollPane getScrollPane_1() {
@@ -137,26 +158,47 @@ public class LicitacijeProzor extends JFrame {
 						if(list.getSelectedIndex() == 0)
 							kraj = true;
 						int vrednost = GUIKontroler.proveraOdgovora(Integer.parseInt(txtOdgovor.getText()));
+						podesiVidljivostLabela(true);
+						lblTOdgovor.setText("" + GUIKontroler.vratiOdgovorLicitacije());
+						SwingUtilities.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+								}
+
+								txtOdgovor.setText("");
+								podesiVidljivostLabela(false);
+
+							}
+						});
 						int poeni = Integer.parseInt(lblBrojPoena.getText()) + vrednost;
 						lblBrojPoena.setText(Integer.toString(poeni));
 						list.setSelectedIndex(list.getSelectedIndex() - 1);
 
 						if(kraj){
-							JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
-									+ " ste osvojili je: " + lblBrojPoena.getText() , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
+							int poen = Integer.parseInt(lblBrojPoena.getText());
+							if(!GUIKontroler.daLiUpisatiNaRangListuLicitacija(poen)){
+								GUIKontroler.pokreniLicitacijeScoreDijalog(false, poeni);
+							}else {
+								GUIKontroler.pokreniLicitacijeScoreDijalog(true, poen);
+							}
 							GUIKontroler.zatvoriProzor();
 						}else{
 							GUIKontroler.pronadjiOdgovorLicitacije();
+
 						}
-						
+
 					}catch(NumberFormatException nfe){
 						JOptionPane.showMessageDialog(null, "Greska pri unosu odgovora. Odgovor ne sme sadrzati "
 								+ "	znakovne vrednosti.","Greska pri unosu",JOptionPane.ERROR_MESSAGE);
+						podesiVidljivostLabela(false);
+
 					}
 				}
 			});
 			btnPotvrdi.setFont(new Font("Tahoma", Font.BOLD, 12));
-			btnPotvrdi.setBounds(158, 286, 103, 23);
+			btnPotvrdi.setBounds(157, 320, 103, 23);
 		}
 		return btnPotvrdi;
 	}
@@ -164,5 +206,98 @@ public class LicitacijeProzor extends JFrame {
 		if(list != null)
 			return (int) list.getSelectedIndex();
 		return -1;
+	}
+	
+	private void podesiVidljivostLabela(boolean vidljivost){
+		lblTacanOdgovor.setVisible(vidljivost);
+		lblTOdgovor.setVisible(vidljivost);
+	}
+	
+	private JLabel getLblTacanOdgovor() {
+		if (lblTacanOdgovor == null) {
+			lblTacanOdgovor = new JLabel("Tacan odgovor:");
+			lblTacanOdgovor.setVisible(false);
+			lblTacanOdgovor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			lblTacanOdgovor.setBounds(22, 258, 94, 25);
+		}
+		return lblTacanOdgovor;
+	}
+	private JLabel getLblTOdgovor() {
+		if (lblTOdgovor == null) {
+			lblTOdgovor = new JLabel("\r\n");
+			lblTOdgovor.setVisible(false);
+			lblTOdgovor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			lblTOdgovor.setBounds(118, 261, 66, 19);
+		}
+		return lblTOdgovor;
+	}
+	private JMenuBar getMenuBar_1() {
+		if (menuBar == null) {
+			menuBar = new JMenuBar();
+			menuBar.add(getMnMenu());
+		}
+		return menuBar;
+	}
+	private JMenu getMnMenu() {
+		if (mnMenu == null) {
+			mnMenu = new JMenu("Menu");
+			mnMenu.setMnemonic('M');
+			mnMenu.add(getMntmPravilaIgra());
+			mnMenu.add(getMntmRangLista());
+			mnMenu.add(getMntmAbout());
+			mnMenu.addSeparator();
+			mnMenu.add(getMntmExit());
+		}
+		return mnMenu;
+	}
+	private JMenuItem getMntmRangLista() {
+		if (mntmRangLista == null) {
+			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+			mntmRangLista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.pokreniLicitacijeScoreDijalog(false, -1);
+				}
+			});
+		}
+		return mntmRangLista;
+	}
+	private JMenuItem getMntmAbout() {
+		if (mntmAbout == null) {
+			mntmAbout = new JMenuItem("About");
+			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Autor kviza licitacije: Marko Popovic.", "About", JOptionPane.PLAIN_MESSAGE);
+				}
+			});
+		}
+		return mntmAbout;
+	}
+	private JMenuItem getMntmPravilaIgra() {
+		if (mntmPravilaIgra == null) {
+			mntmPravilaIgra = new JMenuItem("Pravila igra");
+			mntmPravilaIgra.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
+			mntmPravilaIgra.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(getContentPane(), "Kviz je podeljen na 3 nivo." + "\n" + "Pitanja 1-5 su pitanja najlakseg niva,"
+							+ "	pitanja 6-10 srednjeg, a pitanja 11-15 najtezeg nivoa." + "\n" + "U zavisnosti od odgovora, na jednom pitanju mozete"
+							+ " osvojiti 10, 5, 3 ili 0 poena.", "Pravila igra", JOptionPane.PLAIN_MESSAGE);
+				}
+			});
+		}
+		return mntmPravilaIgra;
+	}
+	private JMenuItem getMntmExit() {
+		if (mntmExit == null) {
+			mntmExit = new JMenuItem("Exit");
+			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					LicitacijeProzor.this.dispose();
+				}
+			});
+		}
+		return mntmExit;
 	}
 }
