@@ -15,6 +15,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class GlavniProzor extends JFrame {
 
@@ -23,6 +25,7 @@ public class GlavniProzor extends JFrame {
 	private JButton btnPitanjaNaDopunu;
 	private JButton btnPitanjaLicitacija;
 	private JLabel lblIzaberiteKviz;
+	private JLabel lblSlika;
 
 	/**
 	 * Launch the application.
@@ -47,7 +50,7 @@ public class GlavniProzor extends JFrame {
 		setResizable(false);
 		setTitle("Kviz");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 459, 346);
+		setBounds(100, 100, 446, 345);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,6 +59,7 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getBtnPitanjaNaDopunu());
 		contentPane.add(getBtnPitanjaLicitacija());
 		contentPane.add(getLblIzaberiteKviz());
+		contentPane.add(getLblSlika());
 		setLocationRelativeTo(null);
 	}
 	private JButton getBtnPitanjaSaPonudjenim() {
@@ -67,7 +71,7 @@ public class GlavniProzor extends JFrame {
 					
 				}
 			});
-			btnPitanjaSaPonudjenim.setBounds(121, 86, 230, 23);
+			btnPitanjaSaPonudjenim.setBounds(71, 181, 293, 23);
 		}
 		return btnPitanjaSaPonudjenim;
 	}
@@ -79,7 +83,7 @@ public class GlavniProzor extends JFrame {
 					GUIKontroler.pokreniProzorDopunska();
 				}
 			});
-			btnPitanjaNaDopunu.setBounds(121, 123, 230, 23);
+			btnPitanjaNaDopunu.setBounds(70, 218, 294, 23);
 		}
 		return btnPitanjaNaDopunu;
 	}
@@ -91,16 +95,26 @@ public class GlavniProzor extends JFrame {
 					GUIKontroler.pokreniProzorLicitacije();
 				}
 			});
-			btnPitanjaLicitacija.setBounds(121, 161, 230, 23);
+			btnPitanjaLicitacija.setBounds(70, 256, 294, 23);
 		}
 		return btnPitanjaLicitacija;
 	}
 	private JLabel getLblIzaberiteKviz() {
 		if (lblIzaberiteKviz == null) {
 			lblIzaberiteKviz = new JLabel("Izaberite kviz :");
-			lblIzaberiteKviz.setFont(new Font("Tahoma", Font.BOLD, 14));
-			lblIzaberiteKviz.setBounds(186, 22, 165, 29);
+			lblIzaberiteKviz.setHorizontalAlignment(SwingConstants.CENTER);
+			lblIzaberiteKviz.setFont(new Font("Tahoma", Font.BOLD, 22));
+			lblIzaberiteKviz.setBounds(71, 27, 293, 29);
 		}
 		return lblIzaberiteKviz;
+	}
+	private JLabel getLblSlika() {
+		if (lblSlika == null) {
+			lblSlika = new JLabel("");
+			lblSlika.setHorizontalAlignment(SwingConstants.CENTER);
+			lblSlika.setIcon(new ImageIcon(GlavniProzor.class.getResource("/ikonice/kvizlogo1.png")));
+			lblSlika.setBounds(71, 53, 294, 109);
+		}
+		return lblSlika;
 	}
 }

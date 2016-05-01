@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.Color;
 import javax.swing.JProgressBar;
+import javax.swing.ImageIcon;
 
 public class PitanjaNaZaokruzivanje extends JFrame {
 
@@ -336,7 +337,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		if (mnOIgri == null) {
 			mnOIgri = new JMenu("O igri");
 			mnOIgri.add(getMntmPravilaIgre());
+			mnOIgri.addSeparator();
 			mnOIgri.add(getMntmAutorIgre());
+			mnOIgri.addSeparator();
 			mnOIgri.add(getMntmIzadji());
 		}
 		return mnOIgri;
@@ -344,6 +347,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JMenuItem getMntmPravilaIgre() {
 		if (mntmPravilaIgre == null) {
 			mntmPravilaIgre = new JMenuItem("Pravila igre");
+			mntmPravilaIgre.setIcon(new ImageIcon(PitanjaNaZaokruzivanje.class.getResource("/ikonice/pravila.jpg")));
 			mntmPravilaIgre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 			mntmPravilaIgre.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -361,6 +365,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JMenuItem getMntmAutorIgre() {
 		if (mntmAutorIgre == null) {
 			mntmAutorIgre = new JMenuItem("Autor igre");
+			mntmAutorIgre.setIcon(new ImageIcon(PitanjaNaZaokruzivanje.class.getResource("/ikonice/about.jpg")));
 			mntmAutorIgre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 			mntmAutorIgre.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -373,6 +378,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JMenuItem getMntmIzadji() {
 		if (mntmIzadji == null) {
 			mntmIzadji = new JMenuItem("Izadji");
+			mntmIzadji.setIcon(new ImageIcon(PitanjaNaZaokruzivanje.class.getResource("/ikonice/exit.jpg")));
 			mntmIzadji.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GUIKontroler.zatvoriZaokruzivanjeProzor();
