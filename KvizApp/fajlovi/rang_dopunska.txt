@@ -1,18 +1,18 @@
 RANG LISTA
+milja
+5
+
 sava
 3
 
+filip
+2
+
+fooora
+2
+
 svrle burazer
 1
-
-EMPTY
-0
-
-EMPTY
-0
-
-EMPTY
-0
 
 EMPTY
 0

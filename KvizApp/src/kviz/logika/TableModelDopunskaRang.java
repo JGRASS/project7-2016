@@ -50,7 +50,7 @@ public class TableModelDopunskaRang extends AbstractTableModel{
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex==0){
+		if(columnIndex==0){	
 			return rowIndex+1;
 		}
 		if(columnIndex == 1){
