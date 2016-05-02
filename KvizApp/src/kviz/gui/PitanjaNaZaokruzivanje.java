@@ -31,12 +31,8 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnA;
-	private JTextArea jtaA;
-	private JTextArea jtaB;
 	private JButton btnB;
-	private JTextArea jtaC;
 	private JButton btnC;
-	private JTextArea jtaD;
 	private JButton btnD;
 	private JTextArea jtaPitanje;
 	private JLabel lblBrPitanja;
@@ -55,6 +51,8 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	private JMenuItem mntmIzadji;
 	private JButton btnZamena;
 	private Thread thread;
+	private JLabel lblBackground;
+	private JLabel lblUkupanBrojPoena;
 //	private String[] pocetnaPitanja;
 //	private String[] pocetniOdgovori;
 
@@ -82,19 +80,16 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 517, 425);
+		setBounds(100, 100, 643, 408);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.add(getLblUkupanBrojPoena());
 		contentPane.add(getBtnA());
-		contentPane.add(getJtaA());
-		contentPane.add(getJtaB());
 		contentPane.add(getBtnB());
-		contentPane.add(getJtaC());
 		contentPane.add(getBtnC());
-		contentPane.add(getJtaD());
 		contentPane.add(getBtnD());
 		contentPane.add(getJtaPitanje());
 		contentPane.add(getLblBrPitanja());
@@ -104,6 +99,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		contentPane.add(getBtnPotvrdiUnos());
 		contentPane.add(getBtn5050());
 		contentPane.add(getBtnZamena());
+		contentPane.add(getLblBackground());
 		thread = new Thread();
 	}
 	public JButton getBtnA() {
@@ -115,17 +111,16 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				
 				public void actionPerformed(ActionEvent arg0) {
 					if(brojac<15){
-					if(jtaA.getText().equals(GUIKontroler.vratiTacan())){
-						btnA.setForeground(Color.BLACK);
+					if(btnA.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
-						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
+						lblBrPoena.setText(""+brojTacnih);
 						
 					}
 					
 					brojac++;
 					GUIKontroler.resetujPitanja();
 				}else{
-					if(jtaA.getText().equals(GUIKontroler.vratiTacan())) brojTacnih++;
+					if(btnA.getText().equals(GUIKontroler.vratiTacan())) brojTacnih++;
 					JOptionPane.showMessageDialog(null, "Uspesno ste zavrsili igru.Broj poena koje"
 							+ " ste osvojili je: " +brojTacnih , "Izvestaj", JOptionPane.INFORMATION_MESSAGE);
 					GUIKontroler.zaokruzivanjeRangLista();
@@ -133,28 +128,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnA.setBounds(10, 175, 46, 30);
+			btnA.setBounds(21, 175, 173, 30);
 		}
 		return btnA;
-	}
-	public JTextArea getJtaA() {
-		if (jtaA == null) {
-			jtaA = new JTextArea();
-			jtaA.setEditable(false);
-			jtaA.setVisible(false);
-			jtaA.setBounds(77, 175, 160, 30);
-//			jtaA.setText(pocetniOdgovori[0]);
-		}
-		return jtaA;
-	}
-	public JTextArea getJtaB() {
-		if (jtaB == null) {
-			jtaB = new JTextArea();
-			jtaB.setEditable(false);
-			jtaB.setVisible(false);
-			jtaB.setBounds(327, 175, 160, 30);
-		}
-		return jtaB;
 	}
 	public JButton getBtnB() {
 		if (btnB == null) {
@@ -163,9 +139,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnB.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(brojac<15){
-					if(jtaB.getText().equals(GUIKontroler.vratiTacan())){
+					if(btnB.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
-						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
+						lblBrPoena.setText(""+brojTacnih);
 					}
 					
 					brojac++;
@@ -179,18 +155,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				
 			});
-			btnB.setBounds(266, 175, 46, 30);
+			btnB.setBounds(266, 175, 173, 30);
 		}
 		return btnB;
-	}
-	public JTextArea getJtaC() {
-		if (jtaC == null) {
-			jtaC = new JTextArea();
-			jtaC.setEditable(false);
-			jtaC.setVisible(false);
-			jtaC.setBounds(77, 235, 160, 30);
-		}
-		return jtaC;
 	}
 	public JButton getBtnC() {
 		if (btnC == null) {
@@ -199,9 +166,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnC.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(brojac<15){
-					if(jtaC.getText().equals(GUIKontroler.vratiTacan())){
+					if(btnC.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
-						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
+						lblBrPoena.setText(""+brojTacnih);
 					}
 					
 					brojac++;
@@ -214,18 +181,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnC.setBounds(10, 235, 46, 30);
+			btnC.setBounds(21, 224, 173, 30);
 		}
 		return btnC;
-	}
-	public JTextArea getJtaD() {
-		if (jtaD == null) {
-			jtaD = new JTextArea();
-			jtaD.setVisible(false);
-			jtaD.setEditable(false);
-			jtaD.setBounds(327, 235, 160, 30);
-		}
-		return jtaD;
 	}
 	public JButton getBtnD() {
 		if (btnD == null) {
@@ -234,9 +192,9 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			btnD.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(brojac<15){
-					if(jtaD.getText().equals(GUIKontroler.vratiTacan())){
+					if(btnD.getText().equals(GUIKontroler.vratiTacan())){
 						brojTacnih++;
-						lblBrPoena.setText("Broj tacnih: " +brojTacnih);
+						lblBrPoena.setText(""+brojTacnih);
 					}
 					
 					brojac++;
@@ -249,7 +207,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnD.setBounds(266, 235, 46, 30);
+			btnD.setBounds(266, 224, 173, 30);
 		}
 		return btnD;
 	}
@@ -260,7 +218,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 			jtaPitanje.setAlignmentY(CENTER_ALIGNMENT);
 			jtaPitanje.setEditable(false);
 			jtaPitanje.setVisible(false);
-			jtaPitanje.setBounds(51, 65, 381, 60);
+			jtaPitanje.setBounds(51, 40, 381, 60);
 			
 		}
 		return jtaPitanje;
@@ -275,9 +233,11 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	}
 	public JLabel getLblBrPoena() {
 		if (lblBrPoena == null) {
-			lblBrPoena = new JLabel("Broj tacnih: 0");
+			lblBrPoena = new JLabel("0");
+			lblBrPoena.setFont(new Font("Tahoma", Font.BOLD, 22));
+			lblBrPoena.setForeground(Color.WHITE);
 			lblBrPoena.setVisible(false);
-			lblBrPoena.setBounds(349, 26, 83, 14);
+			lblBrPoena.setBounds(518, 160, 39, 30);
 		}
 		return lblBrPoena;
 	}
@@ -322,7 +282,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 					GUIKontroler.izbaciPitanja();
 				}
 			});
-			btn5050.setBounds(118, 295, 100, 55);
+			btn5050.setBounds(122, 276, 100, 55);
 		}
 		return btn5050;
 	}
@@ -400,11 +360,28 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 			});
 			btnZamena.setVisible(false);
-			btnZamena.setBounds(266, 295, 100, 55);
+			btnZamena.setBounds(270, 276, 100, 55);
 		}
 		return btnZamena;
 	}
 	public String getBrTacnih(){
 		return brojTacnih+"";
+	}
+	private JLabel getLblBackground() {
+		if (lblBackground == null) {
+			lblBackground = new JLabel("");
+			lblBackground.setIcon(new ImageIcon(PitanjaNaZaokruzivanje.class.getResource("/ikonice/layoutKviz.jpg")));
+			lblBackground.setBounds(0, 0, 640, 360);
+		}
+		return lblBackground;
+	}
+	private JLabel getLblUkupanBrojPoena() {
+		if (lblUkupanBrojPoena == null) {
+			lblUkupanBrojPoena = new JLabel("15");
+			lblUkupanBrojPoena.setForeground(Color.WHITE);
+			lblUkupanBrojPoena.setFont(new Font("Tahoma", Font.BOLD, 22));
+			lblUkupanBrojPoena.setBounds(582, 160, 34, 30);
+		}
+		return lblUkupanBrojPoena;
 	}
 }
