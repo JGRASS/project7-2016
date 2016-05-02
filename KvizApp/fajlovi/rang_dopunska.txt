@@ -1,18 +1,18 @@
 RANG LISTA
-milja
-5
+EMPTY
+0
 
-sava
-3
+EMPTY
+0
 
-filip
-2
+EMPTY
+0
 
-fooora
-2
+EMPTY
+0
 
-svrle burazer
-1
+EMPTY
+0
 
 EMPTY
 0

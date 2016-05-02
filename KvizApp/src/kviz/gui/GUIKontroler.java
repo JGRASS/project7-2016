@@ -1,13 +1,6 @@
 package kviz.gui;
 
 import java.awt.EventQueue;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import kviz.gui.dijalog.LicitacijeScoreDijalog;
@@ -71,11 +64,14 @@ public class GUIKontroler {
 	 * Logika kviza pitalice na dopunu
 	 */
 	private static DopunskaLogika dopunskaLogika;
+	/**
+	 * Prozor rang liste
+	 */
 	private static DopunskaHighscore dopunskaProzorRang;
 	/**
 	 * Niz stringova u koji ce se upisivati trenutno pitanje i odgovor
 	 */
-	private static String[] pitanjeOdgovor;
+	private static String[] pitanjeOdgovor = null;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
