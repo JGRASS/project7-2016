@@ -189,7 +189,9 @@ public class GUIKontroler {
 		zaokruzivanjeProzor.getBtnB().setText(odgovori[1]);
 		zaokruzivanjeProzor.getBtnB().setVisible(true);
 		zaokruzivanjeProzor.getBtnC().setText(odgovori[2]);
+		zaokruzivanjeProzor.getBtnC().setVisible(true);
 		zaokruzivanjeProzor.getBtnD().setVisible(true);
+		zaokruzivanjeProzor.getBtnD().setText(odgovori[3]);
 	
 	}
 	public static String vratiTacan(){

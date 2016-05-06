@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import kviz.logika.ZaokruzivanjeLogika;
@@ -25,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.Color;
 import javax.swing.JProgressBar;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class PitanjaNaZaokruzivanje extends JFrame {
@@ -79,7 +81,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 		setTitle("Kviz");
 		
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 643, 408);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
@@ -128,13 +130,15 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnA.setBounds(21, 175, 173, 30);
+			btnA.setBounds(49, 175, 200, 30);
 		}
 		return btnA;
 	}
 	public JButton getBtnB() {
 		if (btnB == null) {
 			btnB = new JButton("B");
+
+			
 			btnB.setVisible(false);
 			btnB.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -155,13 +159,15 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				
 			});
-			btnB.setBounds(266, 175, 173, 30);
+			btnB.setBounds(266, 175, 200, 30);
 		}
 		return btnB;
 	}
 	public JButton getBtnC() {
 		if (btnC == null) {
 			btnC = new JButton("C");
+
+			
 			btnC.setVisible(false);
 			btnC.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -181,13 +187,15 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnC.setBounds(21, 224, 173, 30);
+			btnC.setBounds(49, 216, 200, 30);
 		}
 		return btnC;
 	}
 	public JButton getBtnD() {
 		if (btnD == null) {
 			btnD = new JButton("D");
+
+			
 			btnD.setVisible(false);
 			btnD.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -207,7 +215,7 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 				}
 				}
 			});
-			btnD.setBounds(266, 224, 173, 30);
+			btnD.setBounds(266, 216, 200, 30);
 		}
 		return btnD;
 	}
@@ -275,8 +283,21 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	}
 	public JButton getBtn5050() {
 		if (btn5050 == null) {
-			btn5050 = new JButton("50/50");
+//			Icon zam = new ImageIcon("fajlovi/zamenaDugme.png");
+//			btnZamena = new JButton(zam);
+//			btnZamena.setOpaque(false);
+//			btnZamena.setContentAreaFilled(false);
+//			btnZamena.setBorderPainted(false);
+//			btnZamena.setFocusPainted(false);
+			Icon dugme5050 = new ImageIcon("src/ikonice/5050dugme.png");
+			Icon hoverDugme5050 = new ImageIcon("src/ikonice/hover5050.png");
+			btn5050 = new JButton(dugme5050);
+			btn5050.setOpaque(false);
+			btn5050.setContentAreaFilled(false);
+			btn5050.setBorderPainted(false);
+			btn5050.setFocusPainted(false);
 			btn5050.setVisible(false);
+			btn5050.setRolloverIcon(hoverDugme5050);
 			btn5050.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GUIKontroler.izbaciPitanja();
@@ -351,7 +372,15 @@ public class PitanjaNaZaokruzivanje extends JFrame {
 	}
 	public JButton getBtnZamena() {
 		if (btnZamena == null) {
-			btnZamena = new JButton("Zamena");
+			Icon zam = new ImageIcon("src/ikonice/zamenaDugme.png");
+			Icon hoverZamena = new ImageIcon("src/ikonice/hoverZamena.png");
+			
+			btnZamena = new JButton(zam);
+			btnZamena.setOpaque(false);
+			btnZamena.setContentAreaFilled(false);
+			btnZamena.setBorderPainted(false);
+			btnZamena.setFocusPainted(false);
+			btnZamena.setRolloverIcon(hoverZamena);
 			btnZamena.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					GUIKontroler.zameniPitanje();
