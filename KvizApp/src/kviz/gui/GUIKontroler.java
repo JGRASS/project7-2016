@@ -110,6 +110,9 @@ public class GUIKontroler {
 		}
 		pronadjiOdgovorLicitacije();
 	}
+	/**
+	 * Metoda za pokretanje prozora kviza sa ponudjenim odgovora i ucitavanje pitanja i rang liste.
+	 */
 	public static void pokreniProzorZaokruzivanje(){
 		zaokruzivanjeProzor = new PitanjaNaZaokruzivanje();
 		zaokruzivanjeProzor.setVisible(true);
@@ -125,15 +128,19 @@ public class GUIKontroler {
 //		resetujPitanja();
 		
 	}
+	/**
+	 * Metoda koja menja pitanja i odgovore i postavlja odredjene komponente prozora vidljivim. 
+	 * Aktivira se posle svakog klika na bilo koje dugme prozora
+	 */
 	public static void resetujPitanja(){
 
 		pitanjaIOdg = zaokruzivanjeLogika.vratiPitanjaIOdgovore(redniBrPitanja);
 		String[] odgovori = pitanjaIOdg[1].split("&");
 		zaokruzivanjeProzor.getJtaPitanje().setText(pitanjaIOdg[0]);
-		zaokruzivanjeProzor.getJtaA().setText(odgovori[0]);
-		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
-		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
-		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+		zaokruzivanjeProzor.getBtnA().setText(odgovori[0]);
+		zaokruzivanjeProzor.getBtnB().setText(odgovori[1]);
+		zaokruzivanjeProzor.getBtnC().setText(odgovori[2]);
+		zaokruzivanjeProzor.getBtnD().setText(odgovori[3]);
 		
 		zaokruzivanjeProzor.getBtnA().setVisible(true);
 		zaokruzivanjeProzor.getBtnB().setVisible(true);
@@ -142,10 +149,10 @@ public class GUIKontroler {
 //		zaokruzivanjeProzor.getBtnZamena().setVisible(true);
 		
 		zaokruzivanjeProzor.getJtaPitanje().setVisible(true);
-		zaokruzivanjeProzor.getJtaA().setVisible(true);
-		zaokruzivanjeProzor.getJtaB().setVisible(true);
-		zaokruzivanjeProzor.getJtaC().setVisible(true);
-		zaokruzivanjeProzor.getJtaD().setVisible(true);
+		zaokruzivanjeProzor.getBtnA().setVisible(true);
+		zaokruzivanjeProzor.getBtnB().setVisible(true);
+		zaokruzivanjeProzor.getBtnC().setVisible(true);
+		zaokruzivanjeProzor.getBtnD().setVisible(true);
 		
 		zaokruzivanjeProzor.getLblBrPitanja().setVisible(true);
 		zaokruzivanjeProzor.getLblBrPoena().setVisible(true);
@@ -154,49 +161,63 @@ public class GUIKontroler {
 		redniBrPitanja++;
 		
 	}
+	/**
+	 * Metoda koja menja velicinu prozora kviza i odredjene komponente prozora sakrije a odgovarajuce komponente postavlja vidljivim.
+	 * Aktivira se nakon pritiska na dugme "Unesite ime"
+	 */
 	public static void refreshPoslePotvrde(){
 		resetujPitanja();
+		zaokruzivanjeProzor.getLblBackground().setVisible(true);
 		zaokruzivanjeProzor.getLblUnesiteIme().setVisible(false);
 		zaokruzivanjeProzor.getJtfUnesiteIme().setVisible(false);
 		zaokruzivanjeProzor.getBtnPotvrdiUnos().setVisible(false);
 		zaokruzivanjeProzor.getBtnZamena().setVisible(true);
 		zaokruzivanjeProzor.getBtn5050().setVisible(true);
+		zaokruzivanjeProzor.getLblUkupanBrojPoena().setVisible(true);
+		zaokruzivanjeProzor.setBounds(100, 100, 643, 408);
+		zaokruzivanjeProzor.setLocationRelativeTo(null);
 	}
+	/**
+	 * Metoda koja izbacuje dva netacna odgovora 
+	 */
 	public static void izbaciPitanja(){
 		int brojPromenjenih = 0;
-		if(!zaokruzivanjeProzor.getJtaA().getText().equals(vratiTacan())){
-			zaokruzivanjeProzor.getJtaA().setVisible(false);
+		if(!zaokruzivanjeProzor.getBtnA().getText().equals(vratiTacan())){
 			zaokruzivanjeProzor.getBtnA().setVisible(false);
 			brojPromenjenih++;
 		}
-		if(!zaokruzivanjeProzor.getJtaB().getText().equals(vratiTacan())){
-			zaokruzivanjeProzor.getJtaB().setVisible(false);
+		if(!zaokruzivanjeProzor.getBtnB().getText().equals(vratiTacan())){
 			zaokruzivanjeProzor.getBtnB().setVisible(false);
 			brojPromenjenih++;
 		}
-		if(!zaokruzivanjeProzor.getJtaC().getText().equals(vratiTacan()) && brojPromenjenih!=2){
-			zaokruzivanjeProzor.getJtaC().setVisible(false);
+		if(!zaokruzivanjeProzor.getBtnC().getText().equals(vratiTacan()) && brojPromenjenih!=2){
 			zaokruzivanjeProzor.getBtnC().setVisible(false);
 			brojPromenjenih++;
 		}
 		zaokruzivanjeProzor.getBtn5050().setVisible(false);
 	}
+	/**
+	 * Metoda koja menja pitanje sa dodatnim (bonus) pitanjem. 
+	 * Poziva se pritiskom na dugme "Zameni"
+	 */
 	public static void zameniPitanje(){
 		pitanjaIOdg = zaokruzivanjeLogika.vratiPitanjaIOdgovore(15);
 		String[] odgovori = pitanjaIOdg[1].split("&");
 		zaokruzivanjeProzor.getJtaPitanje().setText(pitanjaIOdg[0]);
-		zaokruzivanjeProzor.getJtaA().setText(odgovori[0]);
-		zaokruzivanjeProzor.getJtaA().setVisible(true);
+		zaokruzivanjeProzor.getBtnA().setText(odgovori[0]);
 		zaokruzivanjeProzor.getBtnA().setVisible(true);
-		zaokruzivanjeProzor.getJtaB().setText(odgovori[1]);
-		zaokruzivanjeProzor.getJtaB().setVisible(true);
+		zaokruzivanjeProzor.getBtnB().setText(odgovori[1]);
 		zaokruzivanjeProzor.getBtnB().setVisible(true);
-		zaokruzivanjeProzor.getJtaC().setText(odgovori[2]);
-		zaokruzivanjeProzor.getJtaC().setVisible(true);
+		zaokruzivanjeProzor.getBtnC().setText(odgovori[2]);
 		zaokruzivanjeProzor.getBtnC().setVisible(true);
-		zaokruzivanjeProzor.getJtaD().setText(odgovori[3]);
+		zaokruzivanjeProzor.getBtnD().setVisible(true);
+		zaokruzivanjeProzor.getBtnD().setText(odgovori[3]);
 	
 	}
+	/**
+	 * Metoda koja vraca tracan odgovor na trenutno pitanje
+	 * @return Tacan odgovor
+	 */
 	public static String vratiTacan(){
 		return pitanjaIOdg[2];
 	}

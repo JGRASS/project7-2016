@@ -17,81 +17,63 @@ import kviz.logika.zaokruzivanjeSistemskeOperacije.SOPitanjaIOdgovori;
 import kviz.logika.zaokruzivanjeSistemskeOperacije.SOUbaciURangListu;
 import kviz.logika.zaokruzivanjeSistemskeOperacije.SOUcitajFajlSaPitanjima;
 import kviz.logika.zaokruzivanjeSistemskeOperacije.SOUcitajRangListu;
-
+/**
+ * Klasa koja upravlja logikom kviza sa ponudjenim odgovorima
+ * @author Andrija
+ *
+ */
 public class ZaokruzivanjeLogika {
 	public LinkedList<String> pitanja;
 	
 	public ZaokruzivanjeLogika(){
 		pitanja = new LinkedList<String>();
 	}
-	
+	/**
+	 * Ucitava sva pitanja i odgovore iz odredjenog fajla i puni listu sa njima
+	 * @throws Exception
+	 */
 	public void ucitajZaokruzivanjeFajl() throws Exception {
 		SOUcitajFajlSaPitanjima.izvrsi(pitanja);		
 	}
-	
+	/**
+	 * Vraca string niz od 3 elemenata u kome je prvi element pitanje,
+	 * drugi element svi odgovori a treci element tacan odgovor
+	 * @param redni broj pitanja
+	 * @return
+	 */
 	public String[] vratiPitanjaIOdgovore(int brPitanja){
 		return SOPitanjaIOdgovori.izvrsi(pitanja, brPitanja);
 	}
+	/**
+	 * Metoda koja ucitava data fajl i iz njega puni rang listu
+	 * @return Rang lista
+	 * @throws Exception
+	 */
 	public LinkedList<String> ucitajRangListu() throws Exception{
 		
-//		LinkedList<String> rank = new LinkedList<>();
-//		BufferedReader in = new BufferedReader(new FileReader("fajlovi/rang_zaokruzivanje.txt"));
-//		while(in.readLine()!=null){
-//			rank.add(in.readLine());
-//			rank.add(in.readLine());
-//		}
-//		in.close();
-//		return rank;
 		return SOUcitajRangListu.izvrsi();
 	}
+	/**
+	 * Metoda koja ubacuje takmicara i njegov ostvareni skor u sortiranu listu i nakon toga
+	 * refreshuje data fajl sa rang listom
+	 * @param imeTakmicara
+	 * @param skor
+	 */
 	public void ubaciURangListu(String imeTakmicara, String skor) {
 		SOUbaciURangListu.izvrsi(imeTakmicara, skor);
-//		LinkedList<String> rank = new LinkedList<>();
-//		try {
-//			rank = ucitajRangListu();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		if(rank.isEmpty()){
-//			rank.add(skor);
-//			rank.add(imeTakmicara);
-//			osveziRangListu(rank);
-//			return;
-//		}
-//		boolean unet = false;
-//		for(int i = 1; i < rank.size(); i=i+2){
-//			if(Integer.parseInt(rank.get(i)) < Integer.parseInt(skor)){
-//				rank.add(i-1, skor);
-//				rank.add(i-1, imeTakmicara);
-//				unet = true;
-//				osveziRangListu(rank);
-//				break;
-//			}
-//		}
-//		if(unet==false){
-//			rank.addLast(skor);
-//			rank.addLast(imeTakmicara);
-//			osveziRangListu(rank);
-//			return;
-//		}
-//		osveziRangListu(rank);
-//		
 	}
+	/**
+	 * Metoda koja refreshuje data fajl koji sadrzi rang listu
+	 * @param rang lista
+	 */
 	private void osveziRangListu(LinkedList<String> rank) {
 		SOUbaciURangListu.osveziRangListu(rank);
-//		try {
-//			DataOutputStream out = new DataOutputStream
-//					(new BufferedOutputStream(new FileOutputStream("fajlovi/zaokruzivanjerang.out")));
-//			for (int i = 0; i < rank.size(); i++) {
-//				out.writeUTF(rank.get(i));
-//			}
-//			out.close();
-//		} catch (Exception e) {
-//			System.out.println("Greska: "+e.getMessage());
-//			e.printStackTrace();
-//		}
 
 	}
+	/**
+	 * Metoda koja vraca listu pitanja
+	 * @return pitanja
+	 */
 	public LinkedList<String> getPitanja() {
 		return pitanja;
 	}

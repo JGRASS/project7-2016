@@ -1,6 +1,10 @@
 package kviz.logika.zaokruzivanjeSistemskeOperacije;
 import java.util.LinkedList;
-
+/**
+ * 
+ * @author Andrija
+ *
+ */
 public class SOPitanjaIOdgovori {
 	
 	public static String[] izvrsi(LinkedList<String> pitanja, int brPitanja){

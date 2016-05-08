@@ -25,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JProgressBar;
+import java.awt.Font;
 
 public class DopunskaProzor extends JFrame {
 
@@ -74,7 +75,7 @@ public class DopunskaProzor extends JFrame {
 		setResizable(false);
 		setTitle("Kviz pitalice na dopunu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 487, 349);
+		setBounds(100, 100, 218, 205);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -183,6 +184,7 @@ public class DopunskaProzor extends JFrame {
 			mnHelp.add(getMntmPravilaIgre());
 			mnHelp.add(getMntmRangLista());
 			mnHelp.add(getMntmAbout());
+			mnHelp.addSeparator();
 			mnHelp.add(getMntmExit());
 		}
 		return mnHelp;
@@ -221,14 +223,16 @@ public class DopunskaProzor extends JFrame {
 	private JLabel getLblImeTakmicara() {
 		if (lblImeTakmicara == null) {
 			lblImeTakmicara = new JLabel("Ime takmicara?");
-			lblImeTakmicara.setBounds(156, 81, 98, 14);
+			lblImeTakmicara.setFont(new Font("Tahoma", Font.BOLD, 14));
+			lblImeTakmicara.setHorizontalAlignment(SwingConstants.CENTER);
+			lblImeTakmicara.setBounds(47, 55, 123, 27);
 		}
 		return lblImeTakmicara;
 	}
 	public JTextField getTxtImeTakmicara() {
 		if (txtImeTakmicara == null) {
 			txtImeTakmicara = new JTextField();
-			txtImeTakmicara.setBounds(131, 107, 123, 20);
+			txtImeTakmicara.setBounds(47, 93, 123, 20);
 			txtImeTakmicara.setColumns(10);
 		}
 		return txtImeTakmicara;
@@ -255,10 +259,12 @@ public class DopunskaProzor extends JFrame {
 						panel.setVisible(true);
 						lblOd15.setVisible(true);
 						progressBar.setVisible(true);
+						setBounds(100, 100, 487, 349);
+						setLocationRelativeTo(null);
 					}
 				}
 			});
-			btnPotvrdi.setBounds(299, 90, 89, 23);
+			btnPotvrdi.setBounds(47, 123, 123, 23);
 		}
 		return btnPotvrdi;
 	}

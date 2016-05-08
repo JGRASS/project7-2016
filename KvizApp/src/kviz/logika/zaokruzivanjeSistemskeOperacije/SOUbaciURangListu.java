@@ -4,8 +4,18 @@ import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.util.LinkedList;
-
+/**
+ * 
+ * @author Andrija
+ *
+ */
 public class SOUbaciURangListu {
+	/**
+	 * Metoda koja ubacuje takmicara i njegov ostvareni skor u sortiranu listu i nakon toga
+	 * refreshuje data fajl sa rang listom
+	 * @param imeTakmicara
+	 * @param skor
+	 */
 	public static void izvrsi(String imeTakmicara, String skor) {
 		LinkedList<String> rank = new LinkedList<>();
 		try {
@@ -38,6 +48,10 @@ public class SOUbaciURangListu {
 		osveziRangListu(rank);
 		
 	}
+	/**
+	 * Metoda koja refreshuje data fajl koji sadrzi rang listu
+	 * @param rang lista
+	 */
 	public static void osveziRangListu(LinkedList<String> rank) {
 		try {
 			DataOutputStream out = new DataOutputStream
