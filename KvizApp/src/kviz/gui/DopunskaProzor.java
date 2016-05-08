@@ -19,6 +19,12 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JProgressBar;
 
 public class DopunskaProzor extends JFrame {
 
@@ -38,6 +44,11 @@ public class DopunskaProzor extends JFrame {
 	private JButton btnPotvrdi;
 	private JMenuItem mntmRangLista;
 	private JMenuItem mntmExit;
+	private JButton btnPocetnoSlovo;
+	private JButton btnBrojSlova;
+	private JPanel panel;
+	private JProgressBar progressBar;
+	private JLabel lblOd15;
 
 	/**
 	 * Launch the application.
@@ -59,6 +70,7 @@ public class DopunskaProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public DopunskaProzor() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DopunskaProzor.class.getResource("/com/sun/java/swing/plaf/windows/icons/Question.gif")));
 		setResizable(false);
 		setTitle("Kviz pitalice na dopunu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,6 +89,9 @@ public class DopunskaProzor extends JFrame {
 		contentPane.add(getLblImeTakmicara());
 		contentPane.add(getTxtImeTakmicara());
 		contentPane.add(getBtnPotvrdi());
+		contentPane.add(getPanel());
+		contentPane.add(getProgressBar());
+		contentPane.add(getLblOd15());
 	}
 	public JLabel getLblPitanje() {
 		if (lblPitanje == null) {
@@ -91,7 +106,7 @@ public class DopunskaProzor extends JFrame {
 		if (txtOdgovor == null) {
 			txtOdgovor = new JTextField();
 			txtOdgovor.setVisible(false);
-			txtOdgovor.setBounds(217, 138, 153, 20);
+			txtOdgovor.setBounds(188, 138, 153, 20);
 			txtOdgovor.setColumns(10);
 		}
 		return txtOdgovor;
@@ -100,7 +115,7 @@ public class DopunskaProzor extends JFrame {
 		if (lblOdgovor == null) {
 			lblOdgovor = new JLabel("Odgovor:");
 			lblOdgovor.setVisible(false);
-			lblOdgovor.setBounds(110, 141, 55, 14);
+			lblOdgovor.setBounds(87, 141, 55, 14);
 		}
 		return lblOdgovor;
 	}
@@ -108,17 +123,18 @@ public class DopunskaProzor extends JFrame {
 		if (lblSkor == null) {
 			lblSkor = new JLabel("SKOR");
 			lblSkor.setVisible(false);
-			lblSkor.setBounds(131, 231, 46, 14);
+			lblSkor.setBounds(437, 187, 34, 14);
 		}
 		return lblSkor;
 	}
 	public JTextField getTxtSkor() {
 		if (txtSkor == null) {
 			txtSkor = new JTextField();
+			txtSkor.setHorizontalAlignment(SwingConstants.CENTER);
 			txtSkor.setVisible(false);
 			txtSkor.setText("0");
 			txtSkor.setEditable(false);
-			txtSkor.setBounds(217, 228, 25, 20);
+			txtSkor.setBounds(431, 212, 17, 20);
 			txtSkor.setColumns(10);
 		}
 		return txtSkor;
@@ -146,9 +162,10 @@ public class DopunskaProzor extends JFrame {
 						GUIKontroler.postaviPitanje(Integer.parseInt(getTxtSkor().getText()));
 					}
 					getTxtOdgovor().setText("");
+					progressBar.setValue(Integer.parseInt(getTxtSkor().getText()));
 				}
 			});
-			btnOk.setBounds(217, 180, 89, 23);
+			btnOk.setBounds(188, 169, 89, 23);
 		}
 		return btnOk;
 	}
@@ -173,6 +190,7 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.setIcon(new ImageIcon(DopunskaProzor.class.getResource("/com/sun/java/swing/plaf/windows/icons/Question.gif")));
 			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_MASK));
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -185,12 +203,15 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmPravilaIgre() {
 		if (mntmPravilaIgre == null) {
 			mntmPravilaIgre = new JMenuItem("Pravila igre");
+			mntmPravilaIgre.setIcon(new ImageIcon(DopunskaProzor.class.getResource("/com/sun/java/swing/plaf/windows/icons/Inform.gif")));
 			mntmPravilaIgre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 			mntmPravilaIgre.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JOptionPane.showMessageDialog(null, "Na postavljeno pitanje unosi se odgovor u odgovarajuce polje. " + 
 				" Nisu bitna velika i mala slova. " + "\n" + 
 				"Pitanja su razlicite tezine. Prvih pet pitanja su laksa, zatim srednje tezine i na kraju najteza. "+"\n"+
+				"U toku igre moze se iskoristiti 2 vreste pomoci: "+
+				"Za ispisivanje pocetnog slova i broja slova tacnog odgovora."+"\n"+
 				"Ako tacno odgovorite na 15 postavljenih pitanja, pobedili ste! Srecno!", "Pravila igre", JOptionPane.INFORMATION_MESSAGE);
 				}
 			});
@@ -217,16 +238,24 @@ public class DopunskaProzor extends JFrame {
 			btnPotvrdi = new JButton("Potvrdi");
 			btnPotvrdi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					btnPotvrdi.setVisible(false);
-					lblImeTakmicara.setVisible(false);
-					txtImeTakmicara.setVisible(false);
-					lblOdgovor.setVisible(true);
-					lblPitanje.setVisible(true);
-					lblSkor.setVisible(true);
-					txtOdgovor.setVisible(true);
-					txtSkor.setVisible(true);
-					btnOk.setVisible(true);
-					
+					if(txtImeTakmicara.getText().isEmpty()){
+						JOptionPane.showMessageDialog(null, "Niste uneli ime!", "Greska", JOptionPane.ERROR_MESSAGE);
+					}else{
+						btnPotvrdi.setVisible(false);
+						lblImeTakmicara.setVisible(false);
+						txtImeTakmicara.setVisible(false);
+						lblOdgovor.setVisible(true);
+						lblPitanje.setVisible(true);
+						lblSkor.setVisible(true);
+						txtOdgovor.setVisible(true);
+						txtSkor.setVisible(true);
+						btnOk.setVisible(true);
+						btnPocetnoSlovo.setVisible(true);
+						btnBrojSlova.setVisible(true);
+						panel.setVisible(true);
+						lblOd15.setVisible(true);
+						progressBar.setVisible(true);
+					}
 				}
 			});
 			btnPotvrdi.setBounds(299, 90, 89, 23);
@@ -236,6 +265,7 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmRangLista() {
 		if (mntmRangLista == null) {
 			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.setIcon(new ImageIcon(DopunskaProzor.class.getResource("/com/sun/java/swing/plaf/windows/icons/DetailsView.gif")));
 			mntmRangLista.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 			mntmRangLista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -249,6 +279,7 @@ public class DopunskaProzor extends JFrame {
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
+			mntmExit.setIcon(new ImageIcon(DopunskaProzor.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
 			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
 			mntmExit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -257,5 +288,62 @@ public class DopunskaProzor extends JFrame {
 			});
 		}
 		return mntmExit;
+	}
+	private JButton getBtnPocetnoSlovo() {
+		if (btnPocetnoSlovo == null) {
+			btnPocetnoSlovo = new JButton("Pocetno slovo");
+			btnPocetnoSlovo.setBounds(26, 21, 131, 23);
+			btnPocetnoSlovo.setVisible(false);
+			btnPocetnoSlovo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					btnPocetnoSlovo.setEnabled(false);
+					GUIKontroler.pomocPocetnoSlovo(txtOdgovor);
+				}
+			});
+		}
+		return btnPocetnoSlovo;
+	}
+	private JButton getBtnBrojSlova() {
+		if (btnBrojSlova == null) {
+			btnBrojSlova = new JButton("Broj slova");
+			btnBrojSlova.setBounds(220, 21, 131, 23);
+			btnBrojSlova.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnBrojSlova.setEnabled(false);
+					GUIKontroler.pomocBrojSlova();
+				}
+			});
+			btnBrojSlova.setVisible(false);
+		}
+		return btnBrojSlova;
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setVisible(false);
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "POMOC", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel.setBounds(47, 243, 374, 66);
+			panel.setLayout(null);
+			panel.add(getBtnPocetnoSlovo());
+			panel.add(getBtnBrojSlova());
+		}
+		return panel;
+	}
+	private JProgressBar getProgressBar() {
+		if (progressBar == null) {
+			progressBar = new JProgressBar();
+			progressBar.setVisible(false);
+			progressBar.setMaximum(15);
+			progressBar.setBounds(47, 218, 374, 14);
+		}
+		return progressBar;
+	}
+	private JLabel getLblOd15() {
+		if (lblOd15 == null) {
+			lblOd15 = new JLabel("/15");
+			lblOd15.setVisible(false);
+			lblOd15.setBounds(448, 215, 23, 14);
+		}
+		return lblOd15;
 	}
 }

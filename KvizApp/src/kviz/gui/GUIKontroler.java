@@ -3,6 +3,8 @@ package kviz.gui;
 import java.awt.EventQueue;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import kviz.gui.dijalog.LicitacijeScoreDijalog;
 import kviz.logika.DopunskaLogika;
 import kviz.logika.LicitacijaLogika;
@@ -268,7 +270,7 @@ public class GUIKontroler {
 	 */
 	public static void postaviPitanje(int skor) {
 		if(skor>=15){
-			JOptionPane.showMessageDialog(null, "Pobedili ste!", "Cestitamo!", JOptionPane.YES_NO_OPTION);
+			JOptionPane.showMessageDialog(null, "Pobedili ste!", "Cestitamo!", JOptionPane.INFORMATION_MESSAGE);
 			rangLista();
 			dopunskaProzor.dispose();
 		}
@@ -363,5 +365,21 @@ public class GUIKontroler {
 	 */
 	public static void serijalizujLicitacije() throws Exception {
 		licitacijeLogika.serijalizuj();
+	}
+	public static void pomocPocetnoSlovo(JTextField txtOdgovor) {
+		txtOdgovor.setText(pitanjeOdgovor[1].substring(0, 1));
+	}
+	public static void pomocBrojSlova() {
+		char[] niz = pitanjeOdgovor[1].toCharArray();
+		int brojSlova = 0;
+		for(int i = 0; i < niz.length;i++){
+			if(niz[i]!=' ')
+				brojSlova++;
+		}
+		JOptionPane.showMessageDialog(null, "Tacan odgovor ima " + brojSlova + " slova", "Pomoc: Broj slova", JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+	public static void resetujRangListu() {
+		dopunskaLogika.resetujRangListu();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import kviz.dopunska.PitanjaDopunska;
 import kviz.dopunska.sistemske_operacije.SOPitanjeNivo;
+import kviz.dopunska.sistemske_operacije.SOResetujRangListu;
 import kviz.dopunska.sistemske_operacije.SOUbaciURangListu;
 import kviz.dopunska.sistemske_operacije.SOUcitajPitanja;
 import kviz.dopunska.sistemske_operacije.SOUcitajRangListuDopunska;
@@ -57,5 +58,9 @@ public class DopunskaLogika {
 	 */
 	public void ubaciURangListu(String imeTakmicara, String skor) {
 		SOUbaciURangListu.izvrsi(imeTakmicara, skor);
+	}
+
+	public void resetujRangListu() {
+		SOResetujRangListu.izvrsi();
 	}
 }
