@@ -90,6 +90,6 @@ C
 
 Sta je DDoS?	
 
-distributed denial-of-service&disambiguation delay-of-service&distributed denial-of-server&distributed destruction-of-server
+distributed denial-of-service&disabled delay-of-service&distributed denial-of-server&distribudet delete-of-server
 
 distributed denial-of-service
