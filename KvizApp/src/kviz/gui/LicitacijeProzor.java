@@ -27,6 +27,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+import javax.swing.ImageIcon;
 
 public class LicitacijeProzor extends JFrame {
 
@@ -36,6 +37,7 @@ public class LicitacijeProzor extends JFrame {
 	private JLabel lblBroj;
 	private JLabel lblBrojPoena;
 	private JLabel lblVasOdgovor;
+	private JLabel lblOsvojeniPoeni;
 	private JTextField txtOdgovor;
 	private JLabel lblPitanje;
 	private JButton btnPotvrdi;
@@ -88,7 +90,18 @@ public class LicitacijeProzor extends JFrame {
 		contentPane.add(getBtnPotvrdi());
 		contentPane.add(getLblTacanOdgovor());
 		contentPane.add(getLblTOdgovor());
+		contentPane.add(getLblOsvojeniPoeni());
 		
+	}
+	
+	private JLabel getLblOsvojeniPoeni() {
+		if (lblOsvojeniPoeni == null) {
+			lblOsvojeniPoeni = new JLabel("");
+			lblOsvojeniPoeni.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblOsvojeniPoeni.setBounds(349, 325, 46, 14);
+			lblOsvojeniPoeni.setVisible(false);
+		}
+		return lblOsvojeniPoeni;
 	}
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane == null) {
@@ -159,6 +172,7 @@ public class LicitacijeProzor extends JFrame {
 							kraj = true;
 						int vrednost = GUIKontroler.proveraOdgovora(Integer.parseInt(txtOdgovor.getText()));
 						podesiVidljivostLabela(true);
+						lblOsvojeniPoeni.setText("+" + vrednost);
 						lblTOdgovor.setText("" + GUIKontroler.vratiOdgovorLicitacije());
 						SwingUtilities.invokeLater(new Runnable() {
 							public void run() {
@@ -168,6 +182,7 @@ public class LicitacijeProzor extends JFrame {
 								}
 
 								txtOdgovor.setText("");
+								lblOsvojeniPoeni.setText("");
 								podesiVidljivostLabela(false);
 
 							}
@@ -211,6 +226,7 @@ public class LicitacijeProzor extends JFrame {
 	private void podesiVidljivostLabela(boolean vidljivost){
 		lblTacanOdgovor.setVisible(vidljivost);
 		lblTOdgovor.setVisible(vidljivost);
+		lblOsvojeniPoeni.setVisible(vidljivost);;
 	}
 	
 	private JLabel getLblTacanOdgovor() {
@@ -253,6 +269,7 @@ public class LicitacijeProzor extends JFrame {
 	private JMenuItem getMntmRangLista() {
 		if (mntmRangLista == null) {
 			mntmRangLista = new JMenuItem("Rang lista");
+			mntmRangLista.setIcon(new ImageIcon(LicitacijeProzor.class.getResource("/com/sun/javafx/scene/web/skin/OrderedListNumbers_16x16_JFX.png")));
 			mntmRangLista.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
 			mntmRangLista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -265,6 +282,7 @@ public class LicitacijeProzor extends JFrame {
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.setIcon(new ImageIcon(LicitacijeProzor.class.getResource("/com/sun/java/swing/plaf/motif/icons/Inform.gif")));
 			mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -277,6 +295,7 @@ public class LicitacijeProzor extends JFrame {
 	private JMenuItem getMntmPravilaIgra() {
 		if (mntmPravilaIgra == null) {
 			mntmPravilaIgra = new JMenuItem("Pravila igra");
+			mntmPravilaIgra.setIcon(new ImageIcon(LicitacijeProzor.class.getResource("/javax/swing/plaf/metal/icons/ocean/file.gif")));
 			mntmPravilaIgra.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
 			mntmPravilaIgra.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

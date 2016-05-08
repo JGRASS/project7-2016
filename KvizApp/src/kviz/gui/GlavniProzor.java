@@ -85,7 +85,7 @@ public class GlavniProzor extends JFrame {
 	}
 	private JButton getBtnPitanjaLicitacija() {
 		if (btnPitanjaLicitacija == null) {
-			btnPitanjaLicitacija = new JButton("Pitanja - licitacija");
+			btnPitanjaLicitacija = new JButton("Licitacije");
 			btnPitanjaLicitacija.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					GUIKontroler.pokreniProzorLicitacije();

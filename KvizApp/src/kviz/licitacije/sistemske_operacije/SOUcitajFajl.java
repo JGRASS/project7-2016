@@ -34,11 +34,11 @@ public class SOUcitajFajl {
 	public static void ucitajTxtFajl(LinkedList<String> prviNivo, LinkedList<String> drugiNivo, 
 			LinkedList<String> treciNivo ) throws Exception{
 		if(!(prviNivo.isEmpty()))
-			prviNivo.remove();
+			prviNivo.clear();
 		if(!(drugiNivo.isEmpty()))
-			drugiNivo.remove();
+			drugiNivo.clear();
 		if(!(treciNivo.isEmpty()))
-			treciNivo.remove();
+			treciNivo.clear();
 		FileReader f = new FileReader("fajlovi/licitacije.txt");
 		BufferedReader in = new BufferedReader(f);
 
