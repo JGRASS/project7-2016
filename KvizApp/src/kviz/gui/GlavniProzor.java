@@ -73,7 +73,7 @@ public class GlavniProzor extends JFrame {
 	}
 	private JButton getBtnPitanjaNaDopunu() {
 		if (btnPitanjaNaDopunu == null) {
-			btnPitanjaNaDopunu = new JButton("Pitanja na dopunu");
+			btnPitanjaNaDopunu = new JButton("Dopunske pitalice");
 			btnPitanjaNaDopunu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					GUIKontroler.pokreniProzorDopunska();
